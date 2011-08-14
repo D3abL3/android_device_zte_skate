@@ -1,6 +1,6 @@
 # Copyright 2006 The Android Open Source Project
 
-ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),blade)
+ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),skate)
 
 MODULE.TARGET.SHARED_LIBRARIES.libril :=
 

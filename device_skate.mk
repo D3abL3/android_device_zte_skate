@@ -25,12 +25,12 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 
 $(call inherit-product, device/common/gps/gps_eu_supl.mk)
 
-DEVICE_PACKAGE_OVERLAYS := device/zte/blade/overlay
+DEVICE_PACKAGE_OVERLAYS := device/zte/skate/overlay
 
 # Discard inherited values and use our own instead.
-PRODUCT_NAME := zte_blade
-PRODUCT_DEVICE := blade
-PRODUCT_MODEL := ZTE Blade
+PRODUCT_NAME := zte_skate
+PRODUCT_DEVICE := skate
+PRODUCT_MODEL := ZTE skate
 
 PRODUCT_PACKAGES += \
     LiveWallpapers \
@@ -43,10 +43,10 @@ PRODUCT_PACKAGES += \
     SpareParts \
     Development \
     Term \
-    gralloc.blade \
-    copybit.blade \
-    gps.blade \
-    sensors.blade \
+    gralloc.skate \
+    copybit.skate \
+    gps.skate \
+    sensors.skate \
     libOmxCore \
     libOmxVidEnc \
     FM \
@@ -54,34 +54,31 @@ PRODUCT_PACKAGES += \
     dexpreopt
 
 # proprietary side of the device
-$(call inherit-product-if-exists, vendor/zte/blade/blade-vendor.mk)
+$(call inherit-product-if-exists, vendor/zte/skate/skate-vendor.mk)
 
 DISABLE_DEXPREOPT := false
 
 PRODUCT_COPY_FILES += \
-    device/zte/blade/qwerty.kl:system/usr/keylayout/qwerty.kl
+    device/zte/skate/qwerty.kl:system/usr/keylayout/qwerty.kl
 
 # fstab
 PRODUCT_COPY_FILES += \
-    device/zte/blade/vold.fstab:system/etc/vold.fstab
+    device/zte/skate/vold.fstab:system/etc/vold.fstab
 
 # Init
 PRODUCT_COPY_FILES += \
-    device/zte/blade/init.blade.rc:root/init.blade.rc \
-    device/zte/blade/ueventd.blade.rc:root/ueventd.blade.rc
+    device/zte/skate/init.skate.rc:root/init.skate.rc \
+    device/zte/skate/ueventd.skate.rc:root/ueventd.skate.rc
 
 # Audio
 PRODUCT_COPY_FILES += \
-    device/zte/blade/AudioFilter.csv:system/etc/AudioFilter.csv \
-    device/zte/blade/AutoVolumeControl.txt:system/etc/AutoVolumeControl.txt
+    device/zte/skate/AutoVolumeControl.txt:system/etc/AutoVolumeControl.txt
 
 # WLAN + BT
 PRODUCT_COPY_FILES += \
-    device/zte/blade/init.bt.sh:system/etc/init.bt.sh \
-    device/zte/blade/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
-    device/zte/blade/dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf \
-    device/zte/blade/prebuilt/hostapd:system/bin/hostapd \
-    device/zte/blade/prebuilt/hostapd.conf:system/etc/wifi/hostapd.conf
+    device/zte/skate/init.bt.sh:system/etc/init.bt.sh \
+    device/zte/skate/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
+    device/zte/skate/dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf
 
 # Install the features available on this device.
 PRODUCT_COPY_FILES += \
@@ -96,20 +93,16 @@ PRODUCT_COPY_FILES += \
 
 #Kernel Modules
 PRODUCT_COPY_FILES += \
-    device/zte/blade/prebuilt/ar6000.ko:system/wifi/ar6000.ko \
-    device/zte/blade/prebuilt/cifs.ko:system/lib/modules/2.6.32.9-perf/cifs.ko \
-    device/zte/blade/prebuilt/zram.ko:system/lib/modules/2.6.32.9-perf/zram.ko \
+    device/zte/skate/prebuilt/dhd.ko:system/lib/dhd.ko
 
 #WiFi firmware
 PRODUCT_COPY_FILES += \
-    device/zte/blade/firmware/regcode:system/wifi/regcode \
-    device/zte/blade/firmware/data.patch.hw2_0.bin:system/wifi/data.patch.hw2_0.bin \
-    device/zte/blade/firmware/athwlan.bin.z77:system/wifi/athwlan.bin.z77 \
-    device/zte/blade/firmware/athtcmd_ram.bin:system/wifi/athtcmd_ram.bin
+    device/zte/skate/firmware/fw_4319.bin:system/etc/fw_4319.bin \
+    device/zte/skate/firmware/fw_4319_apsta.bin:system/etc/fw_4319_apsta.bin
 
 #Media profile
 PRODUCT_COPY_FILES += \
-    device/zte/blade/media_profiles.xml:system/etc/media_profiles.xml
+    device/zte/skate/media_profiles.xml:system/etc/media_profiles.xml
 
 PRODUCT_PROPERTY_OVERRIDES := \
     keyguard.no_require_sim=true \
@@ -129,7 +122,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=240 \
     ro.sf.hwrotation=180
 
-# Blade uses high-density artwork where available
+# skate uses high-density artwork where available
 PRODUCT_LOCALES += hdpi
 
 # we have enough storage space to hold precise GC data
@@ -144,7 +137,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.com.android.dateformat=dd-MM-yyyy \
     ro.ril.hsxpa=2 \
     ro.ril.gprsclass=10 \
-    ro.build.baseband_version=P729BB01 \
     ro.telephony.default_network=0 \
     ro.telephony.call_ring.multiple=false
 
@@ -157,6 +149,5 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapsize=32m \
     dalvik.vm.execution-mode=int:jit \
     dalvik.vm.dexopt-data-only=1 \
-    ro.opengles.version=131072  \
-    ro.compcache.default=0
+    ro.opengles.version=131072
 

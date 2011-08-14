@@ -32,7 +32,6 @@ key 106   DPAD_RIGHT        WAKE_DROPPED
 key 115   VOLUME_UP         WAKE
 key 114   VOLUME_DOWN       WAKE
 key 116   POWER             WAKE
-key 142   POWER             WAKE
 key 212   CAMERA
 
 key 16    Q
@@ -87,4 +86,6 @@ key 12    MINUS
 key 13    EQUALS
 key 215   AT
 
-key 226   HEADSETHOOK       WAKE_DROPPED
+# On an AT keyboard: ESC, F10
+key 1     BACK              WAKE_DROPPED
+key 68    MENU              WAKE_DROPPED
