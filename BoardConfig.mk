@@ -49,8 +49,8 @@ BOARD_FM_DEVICE := si4708
 
 # Wifi related defines
 BOARD_WPA_SUPPLICANT_DRIVER := AWEXT
-WIFI_DRIVER_MODULE_PATH := "/system/wifi/kineto_gan.ko"
-WIFI_DRIVER_MODULE_NAME := "kineto_gan"
+WIFI_DRIVER_MODULE_PATH := "/system/lib/bcm4319.ko"
+WIFI_DRIVER_MODULE_NAME := "dhd"
 WPA_SUPPLICANT_VERSION := VER_0_6_X
 
 WITH_JIT := true
@@ -61,7 +61,7 @@ TARGET_LIBAGL_USE_GRALLOC_COPYBITS := true
 JS_ENGINE := v8
 
 # OpenGL drivers config file path
-BOARD_EGL_CFG := device/zte/skate/egl.cfg
+BOARD_EGL_CFG := device/zte/skate/prebuilt/lib/egl.cfg
 
 # No fallback font by default (space savings)
 #NO_FALLBACK_FONT:=true

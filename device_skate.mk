@@ -59,26 +59,31 @@ $(call inherit-product-if-exists, vendor/zte/skate/skate-vendor.mk)
 DISABLE_DEXPREOPT := false
 
 PRODUCT_COPY_FILES += \
-    device/zte/skate/qwerty.kl:system/usr/keylayout/qwerty.kl
+    device/zte/skate/prebuilt/usr/keylayout/qwerty.kl:system/usr/keylayout/qwerty.kl \
+    device/zte/skate/prebuilt/usr/keylayout/skate_keypad.kl:system/usr/keylayout/skate_keypad.kl \
+    device/zte/skate/prebuilt/usr/keychars/skate_keypad.kcm.bin:system/usr/keychars/skate_keypad.kcm.bin
 
-# fstab
+# Vold
 PRODUCT_COPY_FILES += \
-    device/zte/skate/vold.fstab:system/etc/vold.fstab
+    device/zte/skate/prebuilt/etc/vold.fstab:system/etc/vold.fstab
 
 # Init
 PRODUCT_COPY_FILES += \
-    device/zte/skate/init.skate.rc:root/init.skate.rc \
-    device/zte/skate/ueventd.skate.rc:root/ueventd.skate.rc
+    device/zte/skate/prebuilt/init.skate.rc:root/init.skate.rc \
+    device/zte/skate/prebuilt/ueventd.skate.rc:root/ueventd.skate.rc \
+    device/zte/skate/prebuilt/usbconfig:root/usbconfig
 
 # Audio
 PRODUCT_COPY_FILES += \
-    device/zte/skate/AutoVolumeControl.txt:system/etc/AutoVolumeControl.txt
+    device/zte/skate/prebuilt/etc/AutoVolumeControl.txt:system/etc/AutoVolumeControl.txt
 
-# WLAN + BT
+# WLAN + BT + FM
 PRODUCT_COPY_FILES += \
-    device/zte/skate/init.bt.sh:system/etc/init.bt.sh \
-    device/zte/skate/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
-    device/zte/skate/dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf
+    device/zte/skate/prebuilt/etc/init.bt.sh:system/etc/init.bt.sh \
+    device/zte/skate/prebuilt/etc/init.qcom.fm.sh:system/etc/init.qcom.fm.sh \
+    device/zte/skate/prebuilt/etc/init.wlanprop.sh:system/etc/init.wlanprop.sh \
+    device/zte/skate/prebuilt/etc/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
+    device/zte/skate/prebuilt/etc/dhcpcd/dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf
 
 # Install the features available on this device.
 PRODUCT_COPY_FILES += \
@@ -93,18 +98,14 @@ PRODUCT_COPY_FILES += \
 
 # Kernel Modules
 PRODUCT_COPY_FILES += \
-    device/zte/skate/prebuilt/bcm4319.ko:system/lib/modules/bcm4319.ko \
-    device/zte/skate/prebuilt/kineto_gan.ko:system/wifi/kineto_gan.ko
+    device/zte/skate/prebuilt/lib/bcm4319.ko:system/lib/bcm4319.ko \
+    device/zte/skate/prebuilt/wifi/kineto_gan.ko:system/wifi/kineto_gan.ko
 
 # WiFi firmware
 PRODUCT_COPY_FILES += \
-    device/zte/skate/firmware/fw_bcm4319.bin:system/etc/firmware/fw_bcm4319.bin \
-    device/zte/skate/firmware/fw_bcm4319_apsta.bin:system/etc/firmware/fw_bcm4319_apsta.bin \
-    device/zte/skate/prebuilt/nvram.txt:system/etc/firmware/nvram.txt
-
-# Media profile
-PRODUCT_COPY_FILES += \
-    device/zte/skate/media_profiles.xml:system/etc/media_profiles.xml
+    device/zte/skate/prebuilt/etc/firmware/fw_bcm4319.bin:system/etc/firmware/fw_bcm4319.bin \
+    device/zte/skate/prebuilt/etc/firmware/fw_bcm4319_apsta.bin:system/etc/firmware/fw_bcm4319_apsta.bin \
+    device/zte/skate/prebuilt/etc/firmware/nvram.txt:system/etc/firmware/nvram.txt
 
 PRODUCT_PROPERTY_OVERRIDES := \
     keyguard.no_require_sim=true \
