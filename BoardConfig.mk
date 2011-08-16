@@ -61,7 +61,7 @@ TARGET_LIBAGL_USE_GRALLOC_COPYBITS := true
 JS_ENGINE := v8
 
 # OpenGL drivers config file path
-BOARD_EGL_CFG := device/zte/skate/prebuilt/lib/egl.cfg
+BOARD_EGL_CFG := device/zte/skate/prebuilt/lib/egl/egl.cfg
 
 # No fallback font by default (space savings)
 #NO_FALLBACK_FONT:=true
