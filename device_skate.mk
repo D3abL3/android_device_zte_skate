@@ -30,7 +30,7 @@ DEVICE_PACKAGE_OVERLAYS := device/zte/skate/overlay
 # Discard inherited values and use our own instead.
 PRODUCT_NAME := zte_skate
 PRODUCT_DEVICE := skate
-PRODUCT_MODEL := ZTE skate
+PRODUCT_MODEL := ZTE Skate
 
 PRODUCT_PACKAGES += \
     LiveWallpapers \
@@ -91,16 +91,18 @@ PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
     frameworks/base/data/etc/android.hardware.touchscreen.multitouch.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.xml
 
-#Kernel Modules
+# Kernel Modules
 PRODUCT_COPY_FILES += \
-    device/zte/skate/prebuilt/dhd.ko:system/lib/dhd.ko
+    device/zte/skate/prebuilt/bcm4319.ko:system/lib/modules/bcm4319.ko \
+    device/zte/skate/prebuilt/kineto_gan.ko:system/wifi/kineto_gan.ko
 
-#WiFi firmware
+# WiFi firmware
 PRODUCT_COPY_FILES += \
-    device/zte/skate/firmware/fw_4319.bin:system/etc/fw_4319.bin \
-    device/zte/skate/firmware/fw_4319_apsta.bin:system/etc/fw_4319_apsta.bin
+    device/zte/skate/firmware/fw_bcm4319.bin:system/etc/firmware/fw_bcm4319.bin \
+    device/zte/skate/firmware/fw_bcm4319_apsta.bin:system/etc/firmware/fw_bcm4319_apsta.bin \
+    device/zte/skate/prebuilt/nvram.txt:system/etc/firmware/nvram.txt
 
-#Media profile
+# Media profile
 PRODUCT_COPY_FILES += \
     device/zte/skate/media_profiles.xml:system/etc/media_profiles.xml
 
@@ -122,7 +124,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=240 \
     ro.sf.hwrotation=180
 
-# skate uses high-density artwork where available
+# Skate uses high-density artwork where available
 PRODUCT_LOCALES += hdpi
 
 # we have enough storage space to hold precise GC data
