@@ -71,7 +71,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/zte/skate/prebuilt/init.skate.rc:root/init.skate.rc \
     device/zte/skate/prebuilt/ueventd.skate.rc:root/ueventd.skate.rc \
-    device/zte/skate/prebuilt/usbconfig:root/usbconfig
+    device/zte/skate/prebuilt/usbconfig:root/sbin/usbconfig
 
 # Audio
 PRODUCT_COPY_FILES += \

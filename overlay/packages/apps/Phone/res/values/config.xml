@@ -21,7 +21,7 @@
          EVENT_SIM_NETWORK_LOCKED events from the Sim.  If true, this will
          prevent the IccNetworkDepersonalizationPanel from being shown,
          and effectively disable the "Sim network lock" feature. -->
-    <bool name="ignore_sim_network_locked_events">true</bool>
+    <bool name="ignore_sim_network_locked_events">false</bool>
 
     <!-- Flag indicating whether the Phone app should provide
          a "Dismiss" button on the SIM network unlock screen.
