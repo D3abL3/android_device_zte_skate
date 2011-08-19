@@ -64,6 +64,7 @@ adb pull /system/lib/libauth.so ../../../vendor/zte/$DEVICE/proprietary/libauth.
 # HW
 adb pull /system/lib/hw/lights.msm7k.so ../../../vendor/zte/$DEVICE/proprietary/lights.msm7k.so
 adb pull /system/lib/hw/copybit.msm7k.so ../../../vendor/zte/$DEVICE/proprietary/copybit.msm7k.so
+adb pull /system/lib/hw/gralloc.msm7k.so ../../../vendor/zte/$DEVICE/proprietary/gralloc.msm7k.so
 adb pull /system/lib/hw/sensors.default.so ../../../vendor/zte/$DEVICE/proprietary/sensors.default.so
 
 # Camera
@@ -209,6 +210,7 @@ PRODUCT_COPY_FILES += \\
 PRODUCT_COPY_FILES += \\
     vendor/zte/__DEVICE__/proprietary/lights.msm7k.so:system/lib/hw/lights.msm7k.so \\
     vendor/zte/__DEVICE__/proprietary/copybit.msm7k.so:system/lib/hw/copybit.msm7k.so \\
+    vendor/zte/__DEVICE__/proprietary/gralloc.msm7k.so:system/lib/hw/gralloc.msm7k.so \\
     vendor/zte/__DEVICE__/proprietary/sensors.default.so:system/lib/hw/sensors.default.so
 
 # Misc
