@@ -43,10 +43,7 @@ PRODUCT_PACKAGES += \
     SpareParts \
     Development \
     Term \
-    gralloc.skate \
-    copybit.skate \
     gps.skate \
-    sensors.skate \
     libOmxCore \
     libOmxVidEnc \
     FM \
@@ -115,7 +112,10 @@ PRODUCT_PROPERTY_OVERRIDES := \
     ro.media.dec.jpeg.memcap=10000000
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    rild.libpath=/system/lib/libril-qc-1.so \
+    ro.build.baseband_version=P743B01 \
+    rild.libpath=/system/lib/librilswitch.so \
+    rilswitch.vendorlibpath=/system/lib/libril-qc-1.so \
+    rilswitch.ganlibpath=/system/lib/libganril.so \
     rild.libargs=-d /dev/smd0 \
     wifi.interface=wlan0 \
     wifi.supplicant_scan_interval=15 \
