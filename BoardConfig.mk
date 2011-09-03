@@ -40,6 +40,7 @@ TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
 TARGET_BOOTLOADER_BOARD_NAME := skate
 
 BOARD_HAVE_BLUETOOTH := true
+BOARD_HAVE_BLUETOOTH_BCM := true
 
 BOARD_KERNEL_CMDLINE := androidboot.hardware=skate console=null g_android.product_id=0x1354 g_android.serial_number=Skate-CM7
 
@@ -49,9 +50,11 @@ BOARD_FM_DEVICE := si4708
 
 # Wifi related defines
 BOARD_WPA_SUPPLICANT_DRIVER := WEXT
-WIFI_DRIVER_MODULE_PATH := "/system/lib/bcm4319.ko"
+WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/dhd.ko"
+WIFI_DRIVER_FW_AP_PATH := "/system/etc/fw_4319_apsta.bin"
+WIFI_DRIVER_FW_STA_PATH := "/system/etc/fw_4319.bin"
+WIFI_DRIVER_MODULE_ARG := "firmware_path=/system/etc/fw_4319.bin,nvram_path=/system/etc/nv_4319.txt"
 WIFI_DRIVER_MODULE_NAME := "dhd"
-WPA_SUPPLICANT_VERSION := VER_0_6_X
 
 WITH_JIT := true
 ENABLE_JSC_JIT := true
@@ -102,7 +105,5 @@ BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x00500000
 BOARD_SYSTEMIMAGE_PARTITION_SIZE   := 0x0dc00000
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x0a280000
 BOARD_FLASH_BLOCK_SIZE := 131072
-
-TARGET_USES_2G_VM_SPLIT := true
 
 BOARD_CUSTOM_RECOVERY_KEYMAPPING:= ../../device/zte/skate/recovery/recovery_ui.c

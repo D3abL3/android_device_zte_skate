@@ -85,26 +85,25 @@ PRODUCT_COPY_FILES += \
 # Install the features available on this device.
 PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
-    frameworks/base/data/etc/android.hardware.camera.autofocus.xml:system/etc/permissions/android.hardware.camera.autofocus.xml \
+    frameworks/base/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
     frameworks/base/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
     frameworks/base/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
     frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
     frameworks/base/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
     frameworks/base/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
-    frameworks/base/data/etc/android.hardware.touchscreen.multitouch.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.xml
+    frameworks/base/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml
 
 # Kernel Modules
 PRODUCT_COPY_FILES += \
-    device/zte/skate/prebuilt/lib/bcm4319.ko:system/lib/bcm4319.ko \
-    device/zte/skate/prebuilt/wifi/kineto_gan.ko:system/wifi/kineto_gan.ko
+    device/zte/skate/prebuilt/lib/modules/dhd.ko:system/lib/modules/dhd.ko
 
 # WiFi firmware
 PRODUCT_COPY_FILES += \
-    device/zte/skate/prebuilt/etc/firmware/fw_bcm4319.bin:system/etc/firmware/fw_bcm4319.bin \
-    device/zte/skate/prebuilt/etc/firmware/fw_bcm4319_apsta.bin:system/etc/firmware/fw_bcm4319_apsta.bin \
-    device/zte/skate/prebuilt/etc/firmware/nvram.txt:system/etc/firmware/nvram.txt
+    device/zte/skate/prebuilt/etc/fw_4319.bin:system/etc/fw_4319.bin \
+    device/zte/skate/prebuilt/etc/fw_4319_apsta.bin:system/etc/fw_4319_apsta.bin \
+    device/zte/skate/prebuilt/etc/nv_4319.txt:system/etc/nv_4319.txt
 
-PRODUCT_PROPERTY_OVERRIDES := \
+PRODUCT_PROPERTY_OVERRIDES += \
     keyguard.no_require_sim=true \
     ro.com.android.dateformat=dd-MM-yyyy \
     ro.ril.hsxpa=1 \
@@ -116,14 +115,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     rild.libpath=/system/lib/librilswitch.so \
     rilswitch.vendorlibpath=/system/lib/libril-qc-1.so \
     rilswitch.ganlibpath=/system/lib/libganril.so \
-    rild.libargs=-d /dev/smd0 \
-    wifi.interface=wlan0 \
-    wifi.supplicant_scan_interval=15 \
+    wifi.supplicant_scan_interval=60 \
     ro.com.android.dataroaming=false
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sf.lcd_density=240 \
-    ro.sf.hwrotation=180
 
 # Skate uses high-density artwork where available
 PRODUCT_LOCALES += hdpi
@@ -147,10 +140,5 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.com.google.locationfeatures=1 \
     ro.setupwizard.enable_bypass=1 \
     ro.media.dec.jpeg.memcap=20000000 \
-    dalvik.vm.lockprof.threshold=500 \
-    dalvik.vm.dexopt-flags=m=y \
-    dalvik.vm.heapsize=32m \
-    dalvik.vm.execution-mode=int:jit \
-    dalvik.vm.dexopt-data-only=1 \
     ro.opengles.version=131072
 

@@ -1,50 +1,25 @@
-# Copyright (c) 2009-2010, Code Aurora Forum. All rights reserved.
-#
-# Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions are met:
-#     * Redistributions of source code must retain the above copyright
-#       notice, this list of conditions and the following disclaimer.
-#     * Redistributions in binary form must reproduce the above copyright
-#       notice, this list of conditions and the following disclaimer in the
-#       documentation and/or other materials provided with the distribution.
-#     * Neither the name of Code Aurora nor
-#       the names of its contributors may be used to endorse or promote
-#       products derived from this software without specific prior written
-#       permission.
-#
-# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-# IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-# NON-INFRINGEMENT ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
-# CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-# EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
-# OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
-# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
-# OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-# ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#
+service dhcp-service /system/bin/netcfg eth0 dhcp
+        oneshot
 
-##########################################
-#History:
-#when       who         what, where, why
-#--------   ----        ---------------------------------------------------
-#2011-01-26 xumei       modify for broadcomm bluetooth chip                   ZTE_BT_QXX_20110106
-#2010-12-07 qxx         compatible of qualcomm and broadcomm bluetooth chip     ZTE_BT_QXX_20101207
-#2010-10-29 wangtao    add directory of "/data/media/recordings" for audio recording WT_CAM_20101029
-#2010-10-14 wangzy     Send proximity threshold from NV to file  ZTE_WANGZY_PROXIMITY_101014 
-#2010-09-29 baijing    Create dir for no-sdcard bluetooth transfer ZTEMT_BJ_NOSDBT
-#2010-09-04 wangtao    Create dir for no-sdcard function
-#2010-04-30 liwei      Update 5330 changes ZTE_BOOT_LIWEI_20100430
-#2010-02-24 fengyuao   added akmd service ZTE_AKMD_FYA_001
-#2010-03-15 fengyuao   merge from 5210 to 5310 for akmd2 devices 
-#2010-03-15 wangtao    change usb swtich file for engineering model
-#2010-04-14 yangyiming change the port-bridge internal port ZTE_YANGYIMING_PORTBRIDEG
-#2010-04-16 wangtao    add bt test mode service for engineering model
-#2011-01-07 zhangbaisheng   	Remove WLAN hostapd settings	ZTE_ZBS_20110107
-#...
-##########################################
+on property:dev.bootcomplete=1
+        stop dhcp-service
+        start dhcp-service
+
+on boot-pause
+    exec system/bin/battery_charging
+
 on boot
+
+# Hack for sh files in /etc 
+    chmod 7777 /system/etc/*.sh
+
+# cpufreq configurations
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor ondemand
+    write /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate 500000
+    write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold 90
+    write /sys/devices/system/cpu/cpufreq/ondemand/down_threshold 30
+
+# Setup bluetooth
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
@@ -63,61 +38,65 @@ on boot
     chown bluetooth bluetooth /sys/devices/platform/msm_serial_hs.0/clock
     chmod 0660 /sys/devices/platform/msm_serial_hs.0/clock
 
-    #ZTE_USB_wangtao_001 20100315 +++++++  
     chown system system /sys/devices/platform/msm_hsusb_periphera/composition
-		
-    # Create the directories used by the Wireless subsystem
-    #mkdir /data/misc/wifi 0770 wifi wifi
-    #mkdir /data/misc/wifi/sockets 0770 wifi wifi
-    #mkdir /data/misc/wifi/wpa_supplicant 0770 wifi wifi
-    #mkdir /data/misc/dhcp 0770 dhcp dhcp
-    #chown dhcp dhcp /data/misc/dhcp
-    #symlink /persist/qcom_wlan_nv.bin /etc/firmware/wlan/qcom_wlan_nv.bin
-    
-     # Create directories for wiper services
+
+# Create the directories used by the Wireless subsystem
+    mkdir /data/misc/wifi 0770 wifi wifi
+    mkdir /data/misc/wifi/sockets 0770 wifi wifi
+    mkdir /data/misc/wifi/wpa_supplicant 0770 wifi wifi
+    mkdir /data/misc/dhcp 0770 dhcp dhcp
+    chown dhcp dhcp /data/misc/dhcp
+    symlink /persist/qcom_wlan_nv.bin /etc/firmware/wlan/qcom_wlan_nv.bin
+    setprop wifi.interface eth0
     mkdir /data/wpstiles/ 0777 shell
     mkdir /etc/wiper 0775 location qcom_oncrpc
-    
-    # Create dir for no-sdcard function, WT_CAM_20100902
-    mkdir /data/media
-    chown system system /data/media
-    chmod 0777 /data/media
-
-    # Create dir for no-sdcard function, WT_CAM_20100902
-    mkdir /data/media/DCIM
-    chown sdcard_rw sdcard_rw /data/media/DCIM
-    chmod 0777 /data/media/DCIM
-
-    # Create dir for no-sdcard function, WT_CAM_20100902
-    mkdir /data/media/DCIM/Camera
-    chown sdcard_rw sdcard_rw /data/media/DCIM/Camera
-    chmod 0777 /data/media/DCIM/Camera
-    
-    # Create dir for no-sdcard function, WT_CAM_20101029
-    mkdir /data/media/recordings
-    chmod 0777 /data/media/recordings
-    
-	# Create dir for no-sdcard bluetooth transfer, ZTEMT_BJ_NOSDBT
-    mkdir /data/media/bluetooth
-    chown sdcard_rw sdcard_rw /data/media/bluetooth
-    chmod 0777 /data/media/bluetooth
-	
-   #Create dir for TouchPal by wanghongyuan 20101029
-	#mkdir /system/data
-	#chmod 0666  /system/data
-	#if [ -e /system/data/TouchPal.config ]; then chmod 0666  /system/data/TouchPal.config ; fi
-
-	#Set device nodes
-	#ZTE_AKMD_FYA_001 20100224 +++++++    
     chmod 0777 /dev/akm8962_aot
     chmod 0777 /dev/akm8962_dev
-	#ZTE_AKMD_FYA_001 20100224 -------
-	chmod 0777 /dev/si4708
-
-	#ZTE_ALSPRX_001  start  
+    chmod 0777 /dev/si4708
     mkdir /data/misc/prox 0777 radio radio   
     chmod 0777  /dev/taos
-	#ZTE_ALSPRX_001  end
+
+# Give system access to wpa_supplicant.conf for backup and restore
+    mkdir /data/misc/wifi 0770 wifi wifi
+    mkdir /data/misc/wifi/wpa_supplicant 0770 wifi wifi  
+    chmod 0660 /data/misc/wifi/wpa_supplicant.conf
+
+# Wpa_supplicant ctrl sockets
+    mkdir /data/misc/wifi/sockets 0770 system wifi
+    mkdir /data/misc/dhcp 0770 dhcp dhcp
+    mkdir /data/system 0775 system system
+    symlink /data/misc/wifi/wpa_supplicant /data/system/wpa_supplicant
+
+# For qmuxd socket
+    mkdir /data/radio 0770 radio radio
+    chown radio radio 0770 /data/radio
+
+    chown system system /sys/class/leds/green/blink
+    chown system system /sys/class/leds/green/grpfreq
+    chown system system /sys/class/leds/green/grppwm
+    chown system system /sys/class/leds/red/blink
+    chown system system /sys/class/leds/red/brightness
+    chown system system /sys/class/leds/red/grpfreq
+    chown system system /sys/class/leds/red/grppwm
+    chown system system /sys/class/leds/amber/blink
+    chown system system /sys/class/leds/amber/brightness
+    chown system system /sys/class/leds/amber/grpfreq
+    chown system system /sys/class/leds/amber/grppwm
+
+# SD card polling
+    chown system system /sys/module/g_android/parameters/product_id
+    chown system system /sys/devices/platform/msm_sdcc.1/polling
+    chown system system /sys/devices/platform/msm_sdcc.2/polling
+    chown system system /sys/devices/platform/msm_sdcc.3/polling
+    chown system system /sys/devices/platform/msm_sdcc.4/polling
+    chown system system /sys/devices/platform/android_usb/composition
+    chown system system /sys/devices/platform/android_usb/remote_wakeup
+
+
+# Enable MASS storage on SDCARD
+    write /sys/devices/platform/mass_storage/lun0/file /dev/block/mmcblk0p1
+    write /sys/bus/platform/drivers/msm_sdcc/msm_sdcc.1/polling 1
+
 on property:init.svc.wpa_supplicant=stopped
     stop dhcpcd
 
@@ -141,17 +120,13 @@ service rmt_storage /system/bin/rmt_storage /dev/block/mmcblk0p10 /dev/block/mmc
 on property:ro.emmc=1
     start rmt_storage
 
-#modify for broadcomm bluetooth chip ZTE_BT_QXX_20110106
-#service hciattach /system/bin/sh /system/etc/init.bt.sh
 service hciattach /system/bin/hciattach -n -s 115200 /dev/ttyHS0 bcm2035 
     user bluetooth
     group qcom_oncrpc bluetooth net_bt_admin system
     disabled
     oneshot
 
-#for RuanMeisi,ZTE_JCD_CONFIG,20100715
 service port-bridge /system/bin/port-bridge /dev/smd0 /dev/ttyGS0
-#ZTE_JCD_CONFIG,end
 
 service qmuxd /system/bin/qmuxd
 
@@ -168,22 +143,78 @@ service netmgrd /system/bin/netmgrd -E
 on property:ro.use_data_netmgrd=true
     start netmgrd
 
-#service btwlancoex /system/bin/sh /system/etc/init.qcom.coex.sh
-#    user root
-#    group qcom_oncrpc bluetooth net_bt_admin
-#    disabled
-#    oneshot
+service usbconfig /sbin/usbconfig
+    oneshot
 
-#service wpa_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant -Dwext -iwlan0 -c/data/misc/wifi/wpa_supplicant.conf -dd
-#    user root
-#    group wifi inet
-#    socket wpa_wlan0 dgram 660 wifi wifi
-#    disabled
-#    oneshot
+on property:persist.sys.wifi.wl=1
+    mkdir /data/wifi
+    start wifi_wl_test
 
-#service dhcpcd /system/bin/dhcpcd -BKL wlan0
-#    disabled
-#    oneshot
+on property:persist.sys.wifi.wl=0
+    stop wifi_wl_test
+
+service wifi_wl_test /system/bin/sh /system/etc/wifi_wl_test.sh
+    user root
+    disabled
+    oneshot
+
+service DrmHost /system/bin/DrmHost
+on property:ro.gcftest=1
+    stop DrmHost
+
+service iqmsd /system/bin/iqmsd
+
+on property:persist.sys.ciq.disable=1
+   stop iqmsd
+on property:ro.gcftest=1
+   stop iqmsd
+
+service flash_recovery /system/etc/install-recovery.sh
+    oneshot
+
+service wlan_prop /system/bin/sh /system/etc/init.wlanprop.sh
+    oneshot
+
+service hostapd /system/bin/hostapd_wps /data/misc/wifi/hostapd.conf
+    socket hostapd_wl0.1 dgram 660 root wifi
+    user root
+    group wifi
+    disabled
+    oneshot
+
+service wpa_supplicant /system/bin/wpa_supplicant -Dawext -W -ieth0 -c/data/misc/wifi/wpa_supplicant.conf
+    group wifi inet
+    socket wpa_eth0 dgram 660 wifi wifi
+    disabled
+    oneshot
+
+service dhcpcd_eth0 /system/bin/dhcpcd -ABKL eth0
+    disabled
+    oneshot
+	
+service iprenew_eth0 /system/bin/iprenew
+    disabled
+    oneshot
+
+service wlan_tool /system/bin/wlan_tool
+    user root
+    group root
+    disabled
+    oneshot
+
+service abtfilt /system/bin/abtfilt -c -d -z -n
+    disabled
+    oneshot
+
+service abtfilt1 /system/bin/abtfilt -a -d -v -z -s
+    disabled
+    oneshot
+
+service btwlancoex /system/bin/sh /system/etc/init.qcom.coex.sh
+    user root
+    group qcom_oncrpc bluetooth net_bt_admin
+    disabled
+    oneshot
 
 service wiperiface /system/bin/wiperiface
     user location
@@ -199,28 +230,25 @@ service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
 service qcom-sh /system/bin/sh /init.qcom.sh
     user root
     oneshot
-#ZTE_AKMD_FYA_001 20100224 +++
+
 service akmd /system/bin/akmd8962
     user root
     oneshot
-#ZTE_AKMD_FYA_001 20100224 ---
 
 service qcom-post-boot /system/bin/sh /system/etc/init.qcom.post_boot.sh
     user root
     disabled
     oneshot
     
-#ZTE_LOG_CXH_0322
 service getlog /system/bin/getlogtofile
     user root
     disabled
     oneshot
-#ZTE_LOG_CXH_0322
 
-#ZTE_JCD_INITCONFIG,begin
 service usbconfig /sbin/usbconfig
     oneshot
-service dhcp-service /system/bin/netcfg wlan0 dhcp
+
+service dhcp-service /system/bin/netcfg eth0 dhcp
         oneshot
 
 on property:dev.bootcomplete=1
@@ -233,66 +261,49 @@ on property:persist.sys.charging.disable=1
 on property:persist.sys.charging.disable=0
     write /sys/module/msm_battery/parameters/usb_chg_enable 1
 
-#ZTE_ZBS_20110107 +++
-#service hostapd /system/bin/hostapd /data/misc/wifi/hostapd.conf
-#    socket hostapd_wlap0 dgram 660 root wifi
-#    user root
-#    group wifi
-#    oneshot
-#    disabled
-#ZTE_ZBS_20110107 ---
-#ZTE_JCD_INITCONFIG,end
-
-#ZTE_wantao_TESTMODE_001 20100416 +++
 service bttestmode /system/bin/sh /system/bin/bt_testmode.sh
     user root
     oneshot
     disabled    
-#ZTE_wangtao_TESTMODE_001 20100416 ---
 
 service ckpd /system/bin/CKPD-daemon
     onrestart /system/bin/log -t RIL-CKPD -p w "CKPD daemon restarted"
 
-#ZTE_HWY_Deblock 20101022
 service deblock /system/bin/sh /system/bin/em_deblock.sh
     user root
     oneshot
-    disabled    
-#ZTE_HWY_Deblock 20101022 
+    disabled
+
+service hostapd /system/bin/hostapd /data/misc/wifi/hostapd.conf
+    socket hostapd_athap0 dgram 660 wifi wifi
+    group wifi inet
+    oneshot
+    disabled
 
 on property:init.svc.bootanim=stopped
     start qcom-post-boot
-#    setprop persist.sys.ztelog.enable 1
-#ZTE_LOG_CXH_0322
-#setprop persist.sys.ztelog.enable 1
+
 on property:persist.sys.ztelog.enable=1
     start getlog
 
 on property:persist.sys.ztelog.enable=0
     stop getlog
-#ZTE_LOG_CXH_0322
 
-#ZTE_WANGZY_PROXIMITY_101014
 service proximity_init /system/bin/proximity.init -r
     disabled
     oneshot
     
 on property:dev.bootcomplete=1
     start proximity_init
-#ZTE_WANGZY_PROXIMITY_101014 
 
-#ZTE_BT_BTLA_XUM_110504 begin
 service btld /system/bin/logwrapper /system/bin/btld -lpm 1 -hb 3000000
     user root
     group bluetooth net_bt_admin
     disabled
     oneshot
 
-# start btld if soft_onoff is enabled
 on property:service.brcm.bt.soft_onoff=1
     start btld
 
-# stop btld if soft_onoff is disabled
 on property:service.brcm.bt.soft_onoff=0
     stop btld
-#ZTE_BT_BTLA_XUM_110504 end
