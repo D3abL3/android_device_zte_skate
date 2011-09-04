@@ -96,6 +96,8 @@ PRODUCT_COPY_FILES += \
 # Kernel Modules
 PRODUCT_COPY_FILES += \
     device/zte/skate/prebuilt/lib/modules/dhd.ko:system/lib/modules/dhd.ko
+#    device/zte/skate/prebuilt/lib/modules/2.6.35.7-pref+/cifs.ko:system/lib/modules/2.6.35.7-pref+/cifs.ko \
+#    device/zte/skate/prebuilt/lib/modules/2.6.35.7-pref+/ramzswap.ko:system/lib/modules/2.6.35.7-pref+/ramzswap.ko 
 
 # WiFi firmware
 PRODUCT_COPY_FILES += \

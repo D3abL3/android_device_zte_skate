@@ -55,6 +55,7 @@ WIFI_DRIVER_FW_AP_PATH := "/system/etc/fw_4319_apsta.bin"
 WIFI_DRIVER_FW_STA_PATH := "/system/etc/fw_4319.bin"
 WIFI_DRIVER_MODULE_ARG := "firmware_path=/system/etc/fw_4319.bin,nvram_path=/system/etc/nv_4319.txt"
 WIFI_DRIVER_MODULE_NAME := "dhd"
+WPA_SUPPLICANT_VERSION := VER_0_6_X
 
 WITH_JIT := true
 ENABLE_JSC_JIT := true
