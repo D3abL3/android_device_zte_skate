@@ -57,6 +57,9 @@ $(call inherit-product-if-exists, vendor/zte/skate/skate-vendor.mk)
 DISABLE_DEXPREOPT := false
 
 PRODUCT_COPY_FILES += \
+    device/zte/skate/prebuilt/bin/prox_cal:system/bin/prox_cal
+
+PRODUCT_COPY_FILES += \
     device/zte/skate/prebuilt/usr/keylayout/qwerty.kl:system/usr/keylayout/qwerty.kl \
     device/zte/skate/prebuilt/usr/keylayout/skate_keypad.kl:system/usr/keylayout/skate_keypad.kl \
     device/zte/skate/prebuilt/usr/keychars/skate_keypad.kcm.bin:system/usr/keychars/skate_keypad.kcm.bin

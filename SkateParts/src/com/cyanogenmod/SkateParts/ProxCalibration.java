@@ -1,4 +1,4 @@
-package com.cyanogenmod.BladeParts;
+package com.cyanogenmod.SkateParts;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;

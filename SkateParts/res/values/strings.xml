@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-        <string name="app_name">ZTE Blade Settings</string>
+        <string name="app_name">ZTE Skate Settings</string>
         <string name="prox_calibration_title_head">Proximity sensor calibration</string>
         <string name="prox_calibration_summary_head">Calibrate proximity sensor</string>
         <string name="prox_display_title_head">Proximity sensor data</string>

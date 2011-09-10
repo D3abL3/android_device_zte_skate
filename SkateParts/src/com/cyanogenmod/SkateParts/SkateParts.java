@@ -1,16 +1,16 @@
-package com.cyanogenmod.BladeParts;
+package com.cyanogenmod.SkateParts;
 
-import com.cyanogenmod.BladeParts.R;
+import com.cyanogenmod.SkateParts.R;
 
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 
-public class BladeParts extends PreferenceActivity {
+public class SkateParts extends PreferenceActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		addPreferencesFromResource(R.xml.bladeparts);
+		addPreferencesFromResource(R.xml.skateparts);
 	}
 }

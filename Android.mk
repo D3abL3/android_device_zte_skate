@@ -13,4 +13,4 @@
 # limitations under the License.
 
 
-include $(call all-named-subdir-makefiles, recovery libaudio libril)
+include $(call all-named-subdir-makefiles, recovery libaudio libril SkateParts)
