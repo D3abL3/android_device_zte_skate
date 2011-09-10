@@ -41,6 +41,7 @@ PRODUCT_PACKAGES += \
     librs_jni \
     Gallery3d \
     SpareParts \
+    SkateParts \
     Development \
     Term \
     gps.skate \
@@ -95,9 +96,10 @@ PRODUCT_COPY_FILES += \
 
 # Kernel Modules
 PRODUCT_COPY_FILES += \
-    device/zte/skate/prebuilt/lib/modules/dhd.ko:system/lib/modules/dhd.ko
-#    device/zte/skate/prebuilt/lib/modules/2.6.35.7-pref+/cifs.ko:system/lib/modules/2.6.35.7-pref+/cifs.ko \
-#    device/zte/skate/prebuilt/lib/modules/2.6.35.7-pref+/ramzswap.ko:system/lib/modules/2.6.35.7-pref+/ramzswap.ko 
+    device/zte/skate/prebuilt/lib/modules/dhd.ko:system/lib/modules/dhd.ko \
+    device/zte/skate/prebuilt/lib/modules/2.6.35.7-pref+/cifs.ko:system/lib/modules/2.6.35.7-pref+/cifs.ko \
+    device/zte/skate/prebuilt/lib/modules/2.6.35.7-pref+/tun.ko:system/lib/modules/2.6.35.7-pref+/tun.ko \
+    device/zte/skate/prebuilt/lib/modules/2.6.35.7-pref+/zram.ko:system/lib/modules/2.6.35.7-pref+/zram.ko 
 
 # WiFi firmware
 PRODUCT_COPY_FILES += \
@@ -114,9 +116,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.build.baseband_version=P743B01 \
-    rild.libpath=/system/lib/librilswitch.so \
-    rilswitch.vendorlibpath=/system/lib/libril-qc-1.so \
-    rilswitch.ganlibpath=/system/lib/libganril.so \
     wifi.supplicant_scan_interval=60 \
     ro.com.android.dataroaming=false
 
