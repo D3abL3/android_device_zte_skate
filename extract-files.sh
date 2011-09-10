@@ -36,20 +36,17 @@ adb pull /system/bin/hci_qcomm_init ../../../vendor/zte/$DEVICE/proprietary/bin/
 chmod 755 ../../../vendor/zte/$DEVICE/proprietary/bin/hci_qcomm_init
 
 # EGL
-adb pull /system/lib/egl/libEGL_adreno200.so ../../../vendor/zte/$DEVICE/proprietary/lib/libEGL_adreno200.so
-adb pull /system/lib/egl/libGLESv2_adreno200.so ../../../vendor/zte/$DEVICE/proprietary/lib/libGLESv2_adreno200.so
-adb pull /system/lib/egl/libGLESv1_CM_adreno200.so ../../../vendor/zte/$DEVICE/proprietary/lib/libGLESv1_CM_adreno200.so
-adb pull /system/lib/egl/libq3dtools_adreno200.so ../../../vendor/zte/$DEVICE/proprietary/lib/libq3dtools_adreno200.so
+adb pull /system/lib/egl/libEGL_adreno200.so ../../../vendor/zte/$DEVICE/proprietary/lib/egl/libEGL_adreno200.so
+adb pull /system/lib/egl/libGLESv2_adreno200.so ../../../vendor/zte/$DEVICE/proprietary/lib/egl/libGLESv2_adreno200.so
+adb pull /system/lib/egl/libGLESv1_CM_adreno200.so ../../../vendor/zte/$DEVICE/proprietary/lib/egl/libGLESv1_CM_adreno200.so
+adb pull /system/lib/egl/libq3dtools_adreno200.so ../../../vendor/zte/$DEVICE/proprietary/lib/egl/libq3dtools_adreno200.so
 adb pull /system/lib/libgsl.so ../../../vendor/zte/$DEVICE/proprietary/lib/libgsl.so
 adb pull /system/etc/firmware/yamato_pfp.fw ../../../vendor/zte/$DEVICE/proprietary/etc/firmware/yamato_pfp.fw
 adb pull /system/etc/firmware/yamato_pm4.fw ../../../vendor/zte/$DEVICE/proprietary/etc/firmware/yamato_pm4.fw
 
 # RIL files
-adb pull /system/lib/librilswitch.so ../../../vendor/zte/$DEVICE/proprietary/lib/librilswitch.so
-adb pull /system/lib/libganril.so ../../../vendor/zte/$DEVICE/proprietary/lib/libganril.so
 adb pull /system/lib/libril-qc-1.so ../../../vendor/zte/$DEVICE/proprietary/lib/libril-qc-1.so
 adb pull /system/lib/libril-qcril-hook-oem.so ../../../vendor/zte/$DEVICE/proprietary/lib/libril-qcril-hook-oem.so
-adb pull /system/lib/libSimCardAuth.so ../../../vendor/zte/$DEVICE/proprietary/lib/libSimCardAuth.so
 adb pull /system/lib/libdiag.so ../../../vendor/zte/$DEVICE/proprietary/lib/libdiag.so
 adb pull /system/lib/liboncrpc.so ../../../vendor/zte/$DEVICE/proprietary/lib/liboncrpc.so
 adb pull /system/lib/libqmi.so ../../../vendor/zte/$DEVICE/proprietary/lib/libqmi.so
@@ -140,19 +137,16 @@ PRODUCT_COPY_FILES += \\
 
 # Graphics
 PRODUCT_COPY_FILES += \\
-    vendor/zte/__DEVICE__/proprietary/lib/libEGL_adreno200.so:system/lib/egl/libEGL_adreno200.so \\
-    vendor/zte/__DEVICE__/proprietary/lib/libGLESv2_adreno200.so:system/lib/egl/libGLESv2_adreno200.so \\
-    vendor/zte/__DEVICE__/proprietary/lib/libGLESv1_CM_adreno200.so:system/lib/egl/libGLESv1_CM_adreno200.so \\
-    vendor/zte/__DEVICE__/proprietary/lib/libq3dtools_adreno200.so:system/lib/egl/libq3dtools_adreno200.so \\
-    vendor/zte/__DEVICE__/proprietary/lib/libgsl.so:system/lib//libgsl.so \\
+    vendor/zte/__DEVICE__/proprietary/lib/egl/libEGL_adreno200.so:system/lib/egl/libEGL_adreno200.so \\
+    vendor/zte/__DEVICE__/proprietary/lib/egl/libGLESv2_adreno200.so:system/lib/egl/libGLESv2_adreno200.so \\
+    vendor/zte/__DEVICE__/proprietary/lib/egl/libGLESv1_CM_adreno200.so:system/lib/egl/libGLESv1_CM_adreno200.so \\
+    vendor/zte/__DEVICE__/proprietary/lib/egl/libq3dtools_adreno200.so:system/lib/egl/libq3dtools_adreno200.so \\
+    vendor/zte/__DEVICE__/proprietary/lib/libgsl.so:system/lib/libgsl.so \\
     vendor/zte/__DEVICE__/proprietary/etc/firmware/yamato_pfp.fw:system/etc/firmware/yamato_pfp.fw \\
     vendor/zte/__DEVICE__/proprietary/etc/firmware/yamato_pm4.fw:system/etc/firmware/yamato_pm4.fw 
 
 # RIL
 PRODUCT_COPY_FILES += \\
-    vendor/zte/__DEVICE__/proprietary/lib/librilswitch.so:system/lib/librilswitch.so \\
-    vendor/zte/__DEVICE__/proprietary/lib/libganril.so:system/lib/libganril.so \\
-    vendor/zte/__DEVICE__/proprietary/lib/libSimCardAuth.so:system/lib/libSimCardAuth.so \\
     vendor/zte/__DEVICE__/proprietary/lib/libril-qc-1.so:system/lib/libril-qc-1.so \\
     vendor/zte/__DEVICE__/proprietary/lib/libril-qcril-hook-oem.so:system/lib/libril-qcril-hook-oem.so \\
     vendor/zte/__DEVICE__/proprietary/lib/libdiag.so:system/lib/libdiag.so \\
