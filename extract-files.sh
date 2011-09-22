@@ -64,11 +64,16 @@ adb pull /system/lib/libpbmlib.so ../../../vendor/zte/$DEVICE/proprietary/lib/li
 adb pull /system/lib/libdss.so ../../../vendor/zte/$DEVICE/proprietary/lib/libdss.so
 adb pull /system/lib/libauth.so ../../../vendor/zte/$DEVICE/proprietary/lib/libauth.so
 
+# GPS
+adb pull /system/lib/libloc-rpc.so ../../../vendor/zte/$DEVICE/proprietary/libloc-rpc.so
+adb pull /system/lib/libcommondefs.so ../../../vendor/zte/$DEVICE/proprietary/libcommondefs.so
+
 # HW
 adb pull /system/lib/hw/lights.msm7k.so ../../../vendor/zte/$DEVICE/proprietary/lib/hw/lights.msm7k.so
-adb pull /system/lib/hw/copybit.msm7k.so ../../../vendor/zte/$DEVICE/proprietary/lib/hw/copybit.msm7k.so
-adb pull /system/lib/hw/gralloc.msm7k.so ../../../vendor/zte/$DEVICE/proprietary/lib/hw/gralloc.msm7k.so
-adb pull /system/lib/hw/sensors.default.so ../../../vendor/zte/$DEVICE/proprietary/lib/hw/sensors.default.so
+adb pull /system/lib/hw/gps.default.so ../../../vendor/zte/$DEVICE/proprietary/lib/hw/gps.default.so
+# adb pull /system/lib/hw/copybit.msm7k.so ../../../vendor/zte/$DEVICE/proprietary/lib/hw/copybit.msm7k.so
+# adb pull /system/lib/hw/gralloc.msm7k.so ../../../vendor/zte/$DEVICE/proprietary/lib/hw/gralloc.msm7k.so
+# adb pull /system/lib/hw/sensors.default.so ../../../vendor/zte/$DEVICE/proprietary/lib/hw/sensors.default.so
 
 # Camera
 adb pull /system/lib/liboemcamera.so ../../../vendor/zte/$DEVICE/proprietary/lib/liboemcamera.so
@@ -107,7 +112,7 @@ adb pull /system/lib/libomx_sharedlibrary.so ../../../vendor/zte/$DEVICE/proprie
 
 # Misc
 adb pull /system/etc/init.qcom.bt.sh ../../../vendor/zte/$DEVICE/proprietary/etc/init.qcom.bt.sh
-adb pull /system/lib/libsensorservice.so ../../../vendor/zte/$DEVICE/proprietary/lib/libsensorservice.so
+# adb pull /system/lib/libsensorservice.so ../../../vendor/zte/$DEVICE/proprietary/lib/libsensorservice.so
 
 (cat << EOF) | sed s/__DEVICE__/$DEVICE/g > ../../../vendor/zte/$DEVICE/$DEVICE-vendor-blobs.mk
 # Copyright (C) 2010 The Android Open Source Project
@@ -205,17 +210,23 @@ PRODUCT_COPY_FILES += \\
     vendor/zte/__DEVICE__/proprietary/lib/libomx_mp3dec_sharedlibrary.so:system/lib/libomx_mp3dec_sharedlibrary.so \\
     vendor/zte/__DEVICE__/proprietary/lib/libomx_sharedlibrary.so:system/lib/libomx_sharedlibrary.so
 
+# GPS
+PRODUCT_COPY_FILES += \\
+    vendor/zte/__DEVICE__/proprietary/libloc-rpc.so:system/lib/libloc-rpc.so \\
+    vendor/zte/__DEVICE__/proprietary/libcommondefs.so:system/lib/libcommondefs.so
+
 # HW
 PRODUCT_COPY_FILES += \\
     vendor/zte/__DEVICE__/proprietary/lib/hw/lights.msm7k.so:system/lib/hw/lights.msm7k.so \\
-    vendor/zte/__DEVICE__/proprietary/lib/hw/copybit.msm7k.so:system/lib/hw/copybit.msm7k.so \\
-    vendor/zte/__DEVICE__/proprietary/lib/hw/gralloc.msm7k.so:system/lib/hw/gralloc.msm7k.so \\
-    vendor/zte/__DEVICE__/proprietary/lib/hw/sensors.default.so:system/lib/hw/sensors.default.so
+    vendor/zte/__DEVICE__/proprietary/lib/hw/gps.default.so:system/lib/hw/gps.default.so
+#    vendor/zte/__DEVICE__/proprietary/lib/hw/copybit.msm7k.so:system/lib/hw/copybit.msm7k.so \\
+#    vendor/zte/__DEVICE__/proprietary/lib/hw/gralloc.msm7k.so:system/lib/hw/gralloc.msm7k.so \\
+#    vendor/zte/__DEVICE__/proprietary/lib/hw/sensors.default.so:system/lib/hw/sensors.default.so
 
 # Misc
 PRODUCT_COPY_FILES += \\
-    vendor/zte/__DEVICE__/proprietary/etc/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \\
-    vendor/zte/__DEVICE__/proprietary/lib/libsensorservice.so:system/lib/libsensorservice.so
+    vendor/zte/__DEVICE__/proprietary/etc/init.qcom.bt.sh:system/etc/init.qcom.bt.sh
+#    vendor/zte/__DEVICE__/proprietary/lib/libsensorservice.so:system/lib/libsensorservice.so
 
 EOF
 

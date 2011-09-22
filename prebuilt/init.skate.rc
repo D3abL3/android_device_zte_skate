@@ -14,7 +14,6 @@ on boot
     chmod 7777 /system/etc/*.sh
 
 # cpufreq configurations
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor ondemand
     write /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate 500000
     write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold 90
     write /sys/devices/system/cpu/cpufreq/ondemand/down_threshold 30
@@ -187,6 +186,9 @@ service wpa_supplicant /system/bin/wpa_supplicant -Dwext -W -ieth0 -c/data/misc/
     socket wpa_eth0 dgram 660 wifi wifi
     disabled
     oneshot
+
+write /sys/module/g_android/parameters/serial_number CM7-Skate
+write /sys/module/g_android/parameters/product_id 0x1351
 
 service dhcpcd_eth0 /system/bin/dhcpcd -ABKL eth0
     disabled

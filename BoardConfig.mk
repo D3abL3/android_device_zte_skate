@@ -24,9 +24,7 @@ LOCAL_PATH:= $(call my-dir)
 # against the traditional rules of inheritance).
 USE_CAMERA_STUB := false
 
-# BOARD_HAS_FLIPPED_SCREEN := true
-
-BOARD_NO_RGBX_8888 := true
+BOARD_HAS_FLIPPED_SCREEN := true
 
 TARGET_NO_BOOTLOADER := true
 
@@ -42,7 +40,7 @@ TARGET_BOOTLOADER_BOARD_NAME := skate
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
 
-BOARD_KERNEL_CMDLINE := androidboot.hardware=skate console=null g_android.product_id=0x1354 g_android.serial_number=Skate-CM7
+BOARD_KERNEL_CMDLINE := androidboot.hardware=skate console=null
 
 BOARD_HAVE_FM_RADIO := true
 BOARD_GLOBAL_CFLAGS += -DHAVE_FM_RADIO
@@ -61,6 +59,7 @@ WITH_JIT := true
 ENABLE_JSC_JIT := true
 
 TARGET_LIBAGL_USE_GRALLOC_COPYBITS := true
+TARGET_USES_16BPPSURFACE_FOR_OPAQUE := true
 
 JS_ENGINE := v8
 
@@ -77,6 +76,9 @@ BOARD_USES_QCOM_LIBS := true
 BOARD_USES_QCOM_GPS := true
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := skate
 BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 1240
+BOARD_GPS_LIBRARIES := libloc
+BOARD_USES_GPSSHIM := true
+BOARD_GPS_NEEDS_XTRA := true
 
 BOARD_KERNEL_BASE := 0x02600000
 
@@ -108,3 +110,4 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x0a280000
 BOARD_FLASH_BLOCK_SIZE := 131072
 
 BOARD_CUSTOM_RECOVERY_KEYMAPPING:= ../../device/zte/skate/recovery/recovery_ui.c
+TARGET_RECOVERY_INITRC := device/zte/skate/recovery/recovery.rc
