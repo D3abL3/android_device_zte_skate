@@ -162,6 +162,9 @@ PRODUCT_COPY_FILES += \\
 
 # RIL
 PRODUCT_COPY_FILES += \\
+    vendor/zte/__DEVICE__/proprietary/lib/libganril.so:system/lib/libganril.so \\
+    vendor/zte/__DEVICE__/proprietary/lib/libSimCardAuth.so:system/lib/libSimCardAuth.so \\
+    vendor/zte/__DEVICE__/proprietary/lib/librilswitch.so:system/lib/librilswitch.so \\
     vendor/zte/__DEVICE__/proprietary/lib/libril-qc-1.so:system/lib/libril-qc-1.so \\
     vendor/zte/__DEVICE__/proprietary/lib/libril-qcril-hook-oem.so:system/lib/libril-qcril-hook-oem.so \\
     vendor/zte/__DEVICE__/proprietary/lib/libdiag.so:system/lib/libdiag.so \\

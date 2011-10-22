@@ -24,6 +24,8 @@ LOCAL_PATH:= $(call my-dir)
 # against the traditional rules of inheritance).
 USE_CAMERA_STUB := false
 
+BOARD_NO_RGBX_8888 := true
+
 BOARD_HAS_FLIPPED_SCREEN := true
 
 TARGET_NO_BOOTLOADER := true
