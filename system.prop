@@ -1,9 +1,7 @@
 #
 # system.prop for Skate
 #
-rild.libpath=/system/lib/librilswitch.so
-rilswitch.vendorlibpath=/system/lib/libril-qc-1.so
-rilswitch.ganlibpath=/system/lib/libganril.so
+rild.libpath=/system/lib/libril-qc-1.so
 rild.libargs=-d /dev/smd0
 dalvik.vm.lockprof.threshold=500
 dalvik.vm.dexopt-flags=m=y

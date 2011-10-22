@@ -14,7 +14,7 @@
 
 #
 # This file is the build configuration for a full Android
-# build for Skate hardware. This cleanly combines a set of
+# build for sapphire hardware. This cleanly combines a set of
 # device-specific aspects (drivers) with a device-agnostic
 # product configuration (apps).
 #
@@ -27,6 +27,11 @@ $(call inherit-product, device/common/gps/gps_eu_supl.mk)
 
 DEVICE_PACKAGE_OVERLAYS := device/zte/skate/overlay
 
+# Discard inherited values and use our own instead.
+PRODUCT_NAME := zte_skate
+PRODUCT_DEVICE := skate
+PRODUCT_MODEL := ZTE Skate
+
 PRODUCT_PACKAGES += \
     LiveWallpapers \
     LiveWallpapersPicker \
@@ -36,8 +41,10 @@ PRODUCT_PACKAGES += \
     librs_jni \
     Gallery3d \
     SpareParts \
+    SkateParts \
     Development \
     Term \
+    gps.skate \
     libOmxCore \
     libOmxVidEnc \
     FM \
@@ -47,12 +54,10 @@ PRODUCT_PACKAGES += \
 # proprietary side of the device
 $(call inherit-product-if-exists, vendor/zte/skate/skate-vendor.mk)
 
-# Discard inherited values and use our own instead.
-PRODUCT_NAME := zte_skate
-PRODUCT_DEVICE := skate
-PRODUCT_MODEL := ZTE Skate
-
 DISABLE_DEXPREOPT := false
+
+PRODUCT_COPY_FILES += \
+    device/zte/skate/prebuilt/bin/prox_cal:system/bin/prox_cal
 
 PRODUCT_COPY_FILES += \
     device/zte/skate/prebuilt/usr/keylayout/qwerty.kl:system/usr/keylayout/qwerty.kl \
@@ -95,6 +100,8 @@ PRODUCT_COPY_FILES += \
 # Kernel Modules
 PRODUCT_COPY_FILES += \
     device/zte/skate/prebuilt/lib/modules/dhd.ko:system/lib/modules/dhd.ko \
+    device/zte/skate/prebuilt/lib/modules/2.6.35.7-pref+/cifs.ko:system/lib/modules/2.6.35.7-pref+/cifs.ko \
+    device/zte/skate/prebuilt/lib/modules/2.6.35.7-pref+/tun.ko:system/lib/modules/2.6.35.7-pref+/tun.ko \
     device/zte/skate/prebuilt/lib/modules/2.6.35.7-pref+/zram.ko:system/lib/modules/2.6.35.7-pref+/zram.ko 
 
 # WiFi firmware
