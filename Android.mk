@@ -12,5 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
-include $(call all-named-subdir-makefiles, recovery libaudio libril libcopybit libgralloc libsensors SkateParts)
+ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),skate)
+include $(call all-named-subdir-makefiles, recovery libaudio liblights libril)
+endif
