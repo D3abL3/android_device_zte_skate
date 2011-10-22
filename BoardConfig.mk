@@ -67,17 +67,6 @@ JS_ENGINE := v8
 # OpenGL drivers config file path
 BOARD_EGL_CFG := device/zte/skate/prebuilt/lib/egl/egl.cfg
 
-# No fallback font by default (space savings)
-#NO_FALLBACK_FONT:=true
-
-BOARD_GPS_LIBRARIES := libloc_api
-
-BOARD_USES_QCOM_HARDWARE := true
-BOARD_USES_QCOM_LIBS := true
-BOARD_USES_QCOM_GPS := true
-BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := skate
-BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 1240
-
 BOARD_KERNEL_BASE := 0x02600000
 
 TARGET_PROVIDES_LIBRIL := true

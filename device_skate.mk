@@ -27,11 +27,6 @@ $(call inherit-product, device/common/gps/gps_eu_supl.mk)
 
 DEVICE_PACKAGE_OVERLAYS := device/zte/skate/overlay
 
-# Discard inherited values and use our own instead.
-PRODUCT_NAME := zte_skate
-PRODUCT_DEVICE := skate
-PRODUCT_MODEL := ZTE Skate
-
 PRODUCT_PACKAGES += \
     LiveWallpapers \
     LiveWallpapersPicker \
@@ -41,10 +36,8 @@ PRODUCT_PACKAGES += \
     librs_jni \
     Gallery3d \
     SpareParts \
-    SkateParts \
     Development \
     Term \
-    gps.skate \
     libOmxCore \
     libOmxVidEnc \
     FM \
@@ -54,10 +47,12 @@ PRODUCT_PACKAGES += \
 # proprietary side of the device
 $(call inherit-product-if-exists, vendor/zte/skate/skate-vendor.mk)
 
-DISABLE_DEXPREOPT := false
+# Discard inherited values and use our own instead.
+PRODUCT_NAME := zte_skate
+PRODUCT_DEVICE := skate
+PRODUCT_MODEL := ZTE Skate
 
-PRODUCT_COPY_FILES += \
-    device/zte/skate/prebuilt/bin/prox_cal:system/bin/prox_cal
+DISABLE_DEXPREOPT := false
 
 PRODUCT_COPY_FILES += \
     device/zte/skate/prebuilt/usr/keylayout/qwerty.kl:system/usr/keylayout/qwerty.kl \
