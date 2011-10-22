@@ -14,7 +14,7 @@
 
 #
 # This file is the build configuration for a full Android
-# build for sapphire hardware. This cleanly combines a set of
+# build for Skate hardware. This cleanly combines a set of
 # device-specific aspects (drivers) with a device-agnostic
 # product configuration (apps).
 #
@@ -95,8 +95,6 @@ PRODUCT_COPY_FILES += \
 # Kernel Modules
 PRODUCT_COPY_FILES += \
     device/zte/skate/prebuilt/lib/modules/dhd.ko:system/lib/modules/dhd.ko \
-    device/zte/skate/prebuilt/lib/modules/2.6.35.7-pref+/cifs.ko:system/lib/modules/2.6.35.7-pref+/cifs.ko \
-    device/zte/skate/prebuilt/lib/modules/2.6.35.7-pref+/tun.ko:system/lib/modules/2.6.35.7-pref+/tun.ko \
     device/zte/skate/prebuilt/lib/modules/2.6.35.7-pref+/zram.ko:system/lib/modules/2.6.35.7-pref+/zram.ko 
 
 # WiFi firmware
