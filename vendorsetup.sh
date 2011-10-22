@@ -21,3 +21,4 @@
 # function: add_lunch_combo generic-eng
 
 add_lunch_combo zte_skate-eng
+add_lunch_combo zte_skate-userdebug

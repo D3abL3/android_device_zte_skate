@@ -19,63 +19,75 @@
 
 LOCAL_PATH:= $(call my-dir)
 
-# Target information
+# WARNING: This line must come *before* including the proprietary
+# variant, so that it gets overwritten by the parent (which goes
+# against the traditional rules of inheritance).
+USE_CAMERA_STUB := false
+
+BOARD_HAS_FLIPPED_SCREEN := true
+
+BOARD_NO_RGBX_8888 := true
+
 TARGET_NO_BOOTLOADER := true
+
 TARGET_BOARD_PLATFORM := msm7k
 TARGET_ARCH_VARIANT := armv6-vfp
 TARGET_CPU_ABI := armeabi
 TARGET_CPU_ABI := armeabi-v6l
 TARGET_CPU_ABI2 := armeabi
+
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
 TARGET_BOOTLOADER_BOARD_NAME := skate
 
-# Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
 
-# FM Radio
+BOARD_KERNEL_CMDLINE := androidboot.hardware=skate console=null g_android.product_id=0x1354 g_android.serial_number=Skate-CM7
+
 BOARD_HAVE_FM_RADIO := true
 BOARD_GLOBAL_CFLAGS += -DHAVE_FM_RADIO
 BOARD_FM_DEVICE := si4708
 
-# WiFi
+# Wifi related defines
 BOARD_WPA_SUPPLICANT_DRIVER := WEXT
 WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/dhd.ko"
+WIFI_DRIVER_FW_AP_PATH := "/system/etc/fw_4319_apsta.bin"
 WIFI_DRIVER_FW_STA_PATH := "/system/etc/fw_4319.bin"
 WIFI_DRIVER_MODULE_ARG := "firmware_path=/system/etc/fw_4319.bin,nvram_path=/system/etc/nv_4319.txt"
 WIFI_DRIVER_MODULE_NAME := "dhd"
 WPA_SUPPLICANT_VERSION := VER_0_6_X
 
-# Browser
-JS_ENGINE := v8
 WITH_JIT := true
 ENABLE_JSC_JIT := true
 
-# Graphics
-BOARD_HAS_FLIPPED_SCREEN := true
 TARGET_LIBAGL_USE_GRALLOC_COPYBITS := true
+
+JS_ENGINE := v8
 
 # OpenGL drivers config file path
 BOARD_EGL_CFG := device/zte/skate/prebuilt/lib/egl/egl.cfg
 
-# Recovery
-BOARD_CUSTOM_RECOVERY_KEYMAPPING:= ../../device/zte/skate/recovery/recovery_ui.c
-TARGET_RECOVERY_INITRC := device/zte/skate/recovery/recovery.rc
+# No fallback font by default (space savings)
+#NO_FALLBACK_FONT:=true
 
-# Target Libs
+BOARD_GPS_LIBRARIES := libloc_api
+
+BOARD_USES_QCOM_HARDWARE := true
+BOARD_USES_QCOM_LIBS := true
+BOARD_USES_QCOM_GPS := true
+BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := skate
+BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 1240
+
+BOARD_KERNEL_BASE := 0x02600000
+
 TARGET_PROVIDES_LIBRIL := true
 TARGET_PROVIDES_LIBAUDIO := true
-USE_CAMERA_STUB := false
 
-# USB mass storage
 BOARD_CUSTOM_USB_CONTROLLER := ../../device/zte/skate/UsbController.cpp
 BOARD_USE_USB_MASS_STORAGE_SWITCH := true
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun
-BOARD_UMS_LUNFILE := "/sys/devices/platform/msm_hsusb/gadget/lun0/file"
 
-# Kernel
-BOARD_KERNEL_BASE := 0x02600000
-BOARD_KERNEL_CMDLINE := androidboot.hardware=skate console=null
+BOARD_UMS_LUNFILE := "/sys/devices/platform/msm_hsusb/gadget/lun0/file"
 
 # # cat /proc/mtd
 # dev:    size   erasesize  name
@@ -94,3 +106,5 @@ BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x00500000
 BOARD_SYSTEMIMAGE_PARTITION_SIZE   := 0x0dc00000
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x0a280000
 BOARD_FLASH_BLOCK_SIZE := 131072
+
+BOARD_CUSTOM_RECOVERY_KEYMAPPING:= ../../device/zte/skate/recovery/recovery_ui.c

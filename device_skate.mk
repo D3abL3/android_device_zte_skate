@@ -14,7 +14,7 @@
 
 #
 # This file is the build configuration for a full Android
-# build for Skate hardware. This cleanly combines a set of
+# build for sapphire hardware. This cleanly combines a set of
 # device-specific aspects (drivers) with a device-agnostic
 # product configuration (apps).
 #
@@ -27,18 +27,24 @@ $(call inherit-product, device/common/gps/gps_eu_supl.mk)
 
 DEVICE_PACKAGE_OVERLAYS := device/zte/skate/overlay
 
+# Discard inherited values and use our own instead.
+PRODUCT_NAME := zte_skate
+PRODUCT_DEVICE := skate
+PRODUCT_MODEL := ZTE Skate
+
 PRODUCT_PACKAGES += \
     LiveWallpapers \
     LiveWallpapersPicker \
     VisualizationWallpapers \
     MagicSmokeWallpapers \
     VisualizationWallpapers \
-    lights.skate \
     librs_jni \
     Gallery3d \
     SpareParts \
+    SkateParts \
     Development \
     Term \
+    gps.skate \
     libOmxCore \
     libOmxVidEnc \
     FM \
@@ -49,6 +55,9 @@ PRODUCT_PACKAGES += \
 $(call inherit-product-if-exists, vendor/zte/skate/skate-vendor.mk)
 
 DISABLE_DEXPREOPT := false
+
+PRODUCT_COPY_FILES += \
+    device/zte/skate/prebuilt/bin/prox_cal:system/bin/prox_cal
 
 PRODUCT_COPY_FILES += \
     device/zte/skate/prebuilt/usr/keylayout/qwerty.kl:system/usr/keylayout/qwerty.kl \
@@ -91,13 +100,14 @@ PRODUCT_COPY_FILES += \
 # Kernel Modules
 PRODUCT_COPY_FILES += \
     device/zte/skate/prebuilt/lib/modules/dhd.ko:system/lib/modules/dhd.ko \
-    device/zte/skate/prebuilt/lib/modules/2.6.35.7-pref+/lzo_compress.ko:system/lib/modules/2.6.35.7-pref+/lzo_compress.ko \
-    device/zte/skate/prebuilt/lib/modules/2.6.35.7-pref+/lzo_decompress.ko:system/lib/modules/2.6.35.7-pref+/lzo_decompress.ko \
+    device/zte/skate/prebuilt/lib/modules/2.6.35.7-pref+/cifs.ko:system/lib/modules/2.6.35.7-pref+/cifs.ko \
+    device/zte/skate/prebuilt/lib/modules/2.6.35.7-pref+/tun.ko:system/lib/modules/2.6.35.7-pref+/tun.ko \
     device/zte/skate/prebuilt/lib/modules/2.6.35.7-pref+/zram.ko:system/lib/modules/2.6.35.7-pref+/zram.ko 
 
 # WiFi firmware
 PRODUCT_COPY_FILES += \
     device/zte/skate/prebuilt/etc/fw_4319.bin:system/etc/fw_4319.bin \
+    device/zte/skate/prebuilt/etc/fw_4319_apsta.bin:system/etc/fw_4319_apsta.bin \
     device/zte/skate/prebuilt/etc/nv_4319.txt:system/etc/nv_4319.txt
 
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -115,7 +125,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Skate uses high-density artwork where available
 PRODUCT_LOCALES += hdpi
 
-# We have enough storage space to hold precise GC data
+# we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
 
 # This should not be needed but on-screen keyboard uses the wrong density without it.
@@ -136,7 +146,3 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.media.dec.jpeg.memcap=20000000 \
     ro.opengles.version=131072
 
-# Discard inherited values and use our own instead. 
-PRODUCT_NAME := zte_skate
-PRODUCT_DEVICE := skate
-PRODUCT_MODEL := ZTE Skate
