@@ -33,9 +33,7 @@ PRODUCT_PACKAGES += \
     VisualizationWallpapers \
     MagicSmokeWallpapers \
     VisualizationWallpapers \
-    copybit.skate \
     lights.skate \
-    gralloc.skate \
     librs_jni \
     Gallery3d \
     SpareParts \
@@ -51,9 +49,6 @@ PRODUCT_PACKAGES += \
 $(call inherit-product-if-exists, vendor/zte/skate/skate-vendor.mk)
 
 DISABLE_DEXPREOPT := false
-
-PRODUCT_COPY_FILES += \
-    device/zte/skate/prebuilt/bin/prox_cal:system/bin/prox_cal
 
 PRODUCT_COPY_FILES += \
     device/zte/skate/prebuilt/usr/keylayout/qwerty.kl:system/usr/keylayout/qwerty.kl \
@@ -96,8 +91,6 @@ PRODUCT_COPY_FILES += \
 # Kernel Modules
 PRODUCT_COPY_FILES += \
     device/zte/skate/prebuilt/lib/modules/dhd.ko:system/lib/modules/dhd.ko \
-    device/zte/skate/prebuilt/wifi/kineto_gan.ko:system/wifi/kineto_gan.ko \
-    device/zte/skate/prebuilt/lib/modules/2.6.35.7-pref+/cifs.ko:system/lib/modules/2.6.35.7-pref+/cifs.ko \
     device/zte/skate/prebuilt/lib/modules/2.6.35.7-pref+/lzo_compress.ko:system/lib/modules/2.6.35.7-pref+/lzo_compress.ko \
     device/zte/skate/prebuilt/lib/modules/2.6.35.7-pref+/lzo_decompress.ko:system/lib/modules/2.6.35.7-pref+/lzo_decompress.ko \
     device/zte/skate/prebuilt/lib/modules/2.6.35.7-pref+/zram.ko:system/lib/modules/2.6.35.7-pref+/zram.ko 

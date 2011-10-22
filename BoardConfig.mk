@@ -65,6 +65,7 @@ TARGET_RECOVERY_INITRC := device/zte/skate/recovery/recovery.rc
 # Target Libs
 TARGET_PROVIDES_LIBRIL := true
 TARGET_PROVIDES_LIBAUDIO := true
+USE_CAMERA_STUB := false
 
 # USB mass storage
 BOARD_CUSTOM_USB_CONTROLLER := ../../device/zte/skate/UsbController.cpp

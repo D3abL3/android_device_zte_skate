@@ -246,9 +246,6 @@ service getlog /system/bin/getlogtofile
     disabled
     oneshot
 
-service usbconfig /sbin/usbconfig
-    oneshot
-
 service dhcp-service /system/bin/netcfg eth0 dhcp
         oneshot
 
@@ -272,12 +269,6 @@ service ckpd /system/bin/CKPD-daemon
 
 service deblock /system/bin/sh /system/bin/em_deblock.sh
     user root
-    oneshot
-    disabled
-
-service hostapd /system/bin/hostapd /data/misc/wifi/hostapd.conf
-    socket hostapd_athap0 dgram 660 wifi wifi
-    group wifi inet
     oneshot
     disabled
 
