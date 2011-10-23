@@ -44,7 +44,6 @@ PRODUCT_PACKAGES += \
     SkateParts \
     Development \
     Term \
-    gps.skate \
     libOmxCore \
     libOmxVidEnc \
     FM \
