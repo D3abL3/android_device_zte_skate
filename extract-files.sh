@@ -77,6 +77,7 @@ adb pull /system/lib/hw/lights.msm7k.so ../../../vendor/zte/$DEVICE/proprietary/
 adb pull /system/lib/hw/copybit.msm7k.so ../../../vendor/zte/$DEVICE/proprietary/lib/hw/copybit.msm7k.so
 adb pull /system/lib/hw/gralloc.msm7k.so ../../../vendor/zte/$DEVICE/proprietary/lib/hw/gralloc.msm7k.so
 adb pull /system/lib/hw/sensors.default.so ../../../vendor/zte/$DEVICE/proprietary/lib/hw/sensors.default.so
+adb pull /system/lib/hw/gps.default.so ../../../vendor/zte/$DEVICE/proprietary/lib/hw/gps.default.so
 
 # Camera
 adb pull /system/lib/liboemcamera.so ../../../vendor/zte/$DEVICE/proprietary/lib/liboemcamera.so
@@ -227,6 +228,7 @@ PRODUCT_COPY_FILES += \\
     vendor/zte/__DEVICE__/proprietary/lib/hw/lights.msm7k.so:system/lib/hw/lights.msm7k.so \\
     vendor/zte/__DEVICE__/proprietary/lib/hw/copybit.msm7k.so:system/lib/hw/copybit.msm7k.so \\
     vendor/zte/__DEVICE__/proprietary/lib/hw/gralloc.msm7k.so:system/lib/hw/gralloc.msm7k.so \\
+    vendor/zte/__DEVICE__/proprietary/lib/hw/gps.default.so:system/lib/hw/gps.default.so \\
     vendor/zte/__DEVICE__/proprietary/lib/hw/sensors.default.so:system/lib/hw/sensors.default.so
 
 # Misc
