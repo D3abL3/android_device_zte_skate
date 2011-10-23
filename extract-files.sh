@@ -35,11 +35,6 @@ chmod 755 ../../../vendor/zte/$DEVICE/proprietary/bin/akmd8962
 adb pull /system/bin/hci_qcomm_init ../../../vendor/zte/$DEVICE/proprietary/bin/hci_qcomm_init
 chmod 755 ../../../vendor/zte/$DEVICE/proprietary/bin/hci_qcomm_init
 
-# Bluetooth
-adb pull  /system/etc/BCM2070B0_002.001.032.0518.0520.hcd ../../../vendor/zte/$DEVICE/proprietary/etc/BCM2070B0_002.001.032.0518.0520.hcd
-adb pull  /system/bin/BCM2070B0_002.001.032.0518.0520.hcd ../../../vendor/zte/$DEVICE/proprietary/bin/BCM2070B0_002.001.032.0518.0520.hcd
-adb pull  /system/bin/hciattach ../../../vendor/zte/$DEVICE/proprietary/bin/hciattach
-
 # EGL
 adb pull /system/lib/egl/libEGL_adreno200.so ../../../vendor/zte/$DEVICE/proprietary/lib/egl/libEGL_adreno200.so
 adb pull /system/lib/egl/libGLESv2_adreno200.so ../../../vendor/zte/$DEVICE/proprietary/lib/egl/libGLESv2_adreno200.so
@@ -50,9 +45,6 @@ adb pull /system/etc/firmware/yamato_pfp.fw ../../../vendor/zte/$DEVICE/propriet
 adb pull /system/etc/firmware/yamato_pm4.fw ../../../vendor/zte/$DEVICE/proprietary/etc/firmware/yamato_pm4.fw
 
 # RIL files
-adb pull /system/lib/librilswitch.so ../../../vendor/zte/$DEVICE/proprietary/lib/librilswitch.so
-adb pull /system/lib/libganril.so ../../../vendor/zte/$DEVICE/proprietary/lib/libganril.so
-adb pull /system/lib/libSimCardAuth.so ../../../vendor/zte/$DEVICE/proprietary/lib/libSimCardAuth.so
 adb pull /system/lib/libril-qc-1.so ../../../vendor/zte/$DEVICE/proprietary/lib/libril-qc-1.so
 adb pull /system/lib/libril-qcril-hook-oem.so ../../../vendor/zte/$DEVICE/proprietary/lib/libril-qcril-hook-oem.so
 adb pull /system/lib/libdiag.so ../../../vendor/zte/$DEVICE/proprietary/lib/libdiag.so
@@ -77,7 +69,6 @@ adb pull /system/lib/hw/lights.msm7k.so ../../../vendor/zte/$DEVICE/proprietary/
 adb pull /system/lib/hw/copybit.msm7k.so ../../../vendor/zte/$DEVICE/proprietary/lib/hw/copybit.msm7k.so
 adb pull /system/lib/hw/gralloc.msm7k.so ../../../vendor/zte/$DEVICE/proprietary/lib/hw/gralloc.msm7k.so
 adb pull /system/lib/hw/sensors.default.so ../../../vendor/zte/$DEVICE/proprietary/lib/hw/sensors.default.so
-+adb pull /system/lib/hw/gps.default.so ../../../vendor/zte/$DEVICE/proprietary/lib/hw/gps.default.so
 
 # Camera
 adb pull /system/lib/liboemcamera.so ../../../vendor/zte/$DEVICE/proprietary/lib/liboemcamera.so
@@ -144,12 +135,6 @@ PRODUCT_COPY_FILES += \\
     vendor/zte/__DEVICE__/proprietary/bin/akmd8962:system/bin/akmd8962 \\
     vendor/zte/__DEVICE__/proprietary/bin/hci_qcomm_init:system/bin/hci_qcomm_init
 
-# Bluetooth
-PRODUCT_COPY_FILES += \\
-    vendor/zte/__DEVICE__/proprietary/bin/BCM2070B0_002.001.032.0518.0520.hcd:system/bin/BCM2070B0_002.001.032.0518.0520.hcd \\
-    vendor/zte/__DEVICE__/proprietary/etc/BCM2070B0_002.001.032.0518.0520.hcd:system/etc/BCM2070B0_002.001.032.0518.0520.hcd \\
-    vendor/zte/__DEVICE__/proprietary/bin/hciattach:system/bin/hciattach
-
 # Graphics
 PRODUCT_COPY_FILES += \\
     vendor/zte/__DEVICE__/proprietary/lib/egl/libEGL_adreno200.so:system/lib/egl/libEGL_adreno200.so \\
@@ -162,9 +147,6 @@ PRODUCT_COPY_FILES += \\
 
 # RIL
 PRODUCT_COPY_FILES += \\
-    vendor/zte/__DEVICE__/proprietary/lib/libganril.so:system/lib/libganril.so \\
-    vendor/zte/__DEVICE__/proprietary/lib/libSimCardAuth.so:system/lib/libSimCardAuth.so \\
-    vendor/zte/__DEVICE__/proprietary/lib/librilswitch.so:system/lib/librilswitch.so \\
     vendor/zte/__DEVICE__/proprietary/lib/libril-qc-1.so:system/lib/libril-qc-1.so \\
     vendor/zte/__DEVICE__/proprietary/lib/libril-qcril-hook-oem.so:system/lib/libril-qcril-hook-oem.so \\
     vendor/zte/__DEVICE__/proprietary/lib/libdiag.so:system/lib/libdiag.so \\

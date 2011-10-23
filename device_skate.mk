@@ -44,6 +44,7 @@ PRODUCT_PACKAGES += \
     SkateParts \
     Development \
     Term \
+    gps.skate \
     libOmxCore \
     libOmxVidEnc \
     FM \
@@ -99,6 +100,8 @@ PRODUCT_COPY_FILES += \
 # Kernel Modules
 PRODUCT_COPY_FILES += \
     device/zte/skate/prebuilt/lib/modules/dhd.ko:system/lib/modules/dhd.ko \
+    device/zte/skate/prebuilt/lib/modules/2.6.35.7-pref+/cifs.ko:system/lib/modules/2.6.35.7-pref+/cifs.ko \
+    device/zte/skate/prebuilt/lib/modules/2.6.35.7-pref+/tun.ko:system/lib/modules/2.6.35.7-pref+/tun.ko \
     device/zte/skate/prebuilt/lib/modules/2.6.35.7-pref+/zram.ko:system/lib/modules/2.6.35.7-pref+/zram.ko 
 
 # WiFi firmware
