@@ -41,10 +41,12 @@ PRODUCT_PACKAGES += \
     librs_jni \
     Gallery3d \
     SpareParts \
-    SkateParts \
     Development \
     Term \
     libOmxCore \
+    copybit.skate \
+    gralloc.skate \
+    lights.skate \
     libOmxVidEnc \
     FM \
     abtfilt \
@@ -54,9 +56,6 @@ PRODUCT_PACKAGES += \
 $(call inherit-product-if-exists, vendor/zte/skate/skate-vendor.mk)
 
 DISABLE_DEXPREOPT := false
-
-PRODUCT_COPY_FILES += \
-    device/zte/skate/prebuilt/bin/prox_cal:system/bin/prox_cal
 
 PRODUCT_COPY_FILES += \
     device/zte/skate/prebuilt/usr/keylayout/qwerty.kl:system/usr/keylayout/qwerty.kl \

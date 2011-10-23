@@ -14,7 +14,6 @@ on boot
     chmod 7777 /system/etc/*.sh
 
 # cpufreq configurations
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor ondemand
     write /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate 500000
     write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold 90
     write /sys/devices/system/cpu/cpufreq/ondemand/down_threshold 30
@@ -166,11 +165,9 @@ service iqmsd /system/bin/iqmsd
 
 on property:persist.sys.ciq.disable=1
    stop iqmsd
+
 on property:ro.gcftest=1
    stop iqmsd
-
-service flash_recovery /system/etc/install-recovery.sh
-    oneshot
 
 service wlan_prop /system/bin/sh /system/etc/init.wlanprop.sh
     oneshot
@@ -245,9 +242,6 @@ service getlog /system/bin/getlogtofile
     disabled
     oneshot
 
-service usbconfig /sbin/usbconfig
-    oneshot
-
 service dhcp-service /system/bin/netcfg eth0 dhcp
         oneshot
 
@@ -274,12 +268,6 @@ service deblock /system/bin/sh /system/bin/em_deblock.sh
     oneshot
     disabled
 
-service hostapd /system/bin/hostapd /data/misc/wifi/hostapd.conf
-    socket hostapd_athap0 dgram 660 wifi wifi
-    group wifi inet
-    oneshot
-    disabled
-
 on property:init.svc.bootanim=stopped
     start qcom-post-boot
 
@@ -288,13 +276,6 @@ on property:persist.sys.ztelog.enable=1
 
 on property:persist.sys.ztelog.enable=0
     stop getlog
-
-service proximity_init /system/bin/proximity.init -r
-    disabled
-    oneshot
-    
-on property:dev.bootcomplete=1
-    start proximity_init
 
 service btld /system/bin/logwrapper /system/bin/btld -lpm 1 -hb 3000000
     user root

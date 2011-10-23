@@ -72,12 +72,13 @@ adb pull /system/lib/libpbmlib.so ../../../vendor/zte/$DEVICE/proprietary/lib/li
 adb pull /system/lib/libdss.so ../../../vendor/zte/$DEVICE/proprietary/lib/libdss.so
 adb pull /system/lib/libauth.so ../../../vendor/zte/$DEVICE/proprietary/lib/libauth.so
 
-# HW
-adb pull /system/lib/hw/lights.msm7k.so ../../../vendor/zte/$DEVICE/proprietary/lib/hw/lights.msm7k.so
-adb pull /system/lib/hw/copybit.msm7k.so ../../../vendor/zte/$DEVICE/proprietary/lib/hw/copybit.msm7k.so
-adb pull /system/lib/hw/gralloc.msm7k.so ../../../vendor/zte/$DEVICE/proprietary/lib/hw/gralloc.msm7k.so
-adb pull /system/lib/hw/sensors.default.so ../../../vendor/zte/$DEVICE/proprietary/lib/hw/sensors.default.so
+# GPS
 adb pull /system/lib/hw/gps.default.so ../../../vendor/zte/$DEVICE/proprietary/lib/hw/gps.default.so
+adb pull /system/lib/libloc_api-rpc-qc.so ../../../vendor/zte/$DEVICE/proprietary/lib/libloc_api-rpc-qc.so
+adb pull /system/lib/libcommondefs.so ../../../vendor/zte/$DEVICE/proprietary/lib/libcommondefs.so
+
+# HW
+adb pull /system/lib/hw/sensors.default.so ../../../vendor/zte/$DEVICE/proprietary/lib/hw/sensors.default.so
 
 # Camera
 adb pull /system/lib/liboemcamera.so ../../../vendor/zte/$DEVICE/proprietary/lib/liboemcamera.so
@@ -223,12 +224,14 @@ PRODUCT_COPY_FILES += \\
     vendor/zte/__DEVICE__/proprietary/lib/libomx_mp3dec_sharedlibrary.so:system/lib/libomx_mp3dec_sharedlibrary.so \\
     vendor/zte/__DEVICE__/proprietary/lib/libomx_sharedlibrary.so:system/lib/libomx_sharedlibrary.so
 
+# GPS
+PRODUCT_COPY_FILES += \\
+    vendor/zte/__DEVICE__/proprietary/lib/hw/gps.default.so:system/lib/hw/gps.default.so \\
+    vendor/zte/__DEVICE__/proprietary/lib/libloc_api-rpc-qc.so:system/lib/libloc_api-rpc-qc.so \\
+    vendor/zte/__DEVICE__/proprietary/lib/libcommondefs.so:system/lib/libcommondefs.so
+
 # HW
 PRODUCT_COPY_FILES += \\
-    vendor/zte/__DEVICE__/proprietary/lib/hw/lights.msm7k.so:system/lib/hw/lights.msm7k.so \\
-    vendor/zte/__DEVICE__/proprietary/lib/hw/copybit.msm7k.so:system/lib/hw/copybit.msm7k.so \\
-    vendor/zte/__DEVICE__/proprietary/lib/hw/gralloc.msm7k.so:system/lib/hw/gralloc.msm7k.so \\
-    vendor/zte/__DEVICE__/proprietary/lib/hw/gps.default.so:system/lib/hw/gps.default.so \\
     vendor/zte/__DEVICE__/proprietary/lib/hw/sensors.default.so:system/lib/hw/sensors.default.so
 
 # Misc
