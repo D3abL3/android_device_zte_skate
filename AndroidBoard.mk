@@ -15,11 +15,10 @@
 LOCAL_PATH := device/zte/skate/prebuilt
 
 #
-# Boot files
+# Kernel
 #
-#ifeq ($(TARGET_PREBUILT_KERNEL),)
+
 TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/kernel
-#endif
 
 file := $(INSTALLED_KERNEL_TARGET)
 ALL_PREBUILT += $(file)

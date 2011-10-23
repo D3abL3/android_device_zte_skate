@@ -24,6 +24,8 @@ LOCAL_PATH:= $(call my-dir)
 # against the traditional rules of inheritance).
 USE_CAMERA_STUB := false
 
+BOARD_NO_RGBX_8888 := true
+
 BOARD_HAS_FLIPPED_SCREEN := true
 
 TARGET_NO_BOOTLOADER := true
@@ -40,7 +42,7 @@ TARGET_BOOTLOADER_BOARD_NAME := skate
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
 
-BOARD_KERNEL_CMDLINE := androidboot.hardware=skate console=null g_android.product_id=0x1354 g_android.serial_number=Skate-CM7
+BOARD_KERNEL_CMDLINE := androidboot.hardware=skate console=null
 
 BOARD_HAVE_FM_RADIO := true
 BOARD_GLOBAL_CFLAGS += -DHAVE_FM_RADIO
@@ -68,13 +70,8 @@ BOARD_EGL_CFG := device/zte/skate/prebuilt/lib/egl/egl.cfg
 # No fallback font by default (space savings)
 #NO_FALLBACK_FONT:=true
 
-BOARD_GPS_LIBRARIES := libloc_api
-
 BOARD_USES_QCOM_HARDWARE := true
 BOARD_USES_QCOM_LIBS := true
-BOARD_USES_QCOM_GPS := true
-BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := skate
-BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 1240
 
 BOARD_KERNEL_BASE := 0x02600000
 

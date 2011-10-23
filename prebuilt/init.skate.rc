@@ -18,6 +18,13 @@ on boot
     write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold 90
     write /sys/devices/system/cpu/cpufreq/ondemand/down_threshold 30
 
+# Setup charging
+    chown system system /sys/module/msm_battery/parameters/usb_chg_enable
+
+# Setup android gadget
+   write /sys/module/g_android/parameters/serial_number CM7-Skate
+   write /sys/module/g_android/parameters/product_id 0x1351
+
 # Setup bluetooth
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
