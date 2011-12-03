@@ -1,0 +1,19 @@
+#
+# system.prop for Skate
+#
+rild.libpath=/system/lib/librilswitch.so
+rilswitch.vendorlibpath=/system/lib/libril-qc-1.so
+rilswitch.ganlibpath=/system/lib/libganril.so
+rild.libargs=-d /dev/smd0
+dalvik.vm.lockprof.threshold=500
+dalvik.vm.dexopt-flags=m=y
+dalvik.vm.heapsize=32m
+dalvik.vm.execution-mode=int:jit
+dalvik.vm.dexopt-data-only=1
+
+ro.sf.lcd_density=240
+ro.sf.hwrotation=180
+
+wifi.interface=eth0
+ro.compcache.default=0
+persist.sys.use_16bpp_alpha=1
