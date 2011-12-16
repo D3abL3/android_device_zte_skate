@@ -24,8 +24,6 @@
          config_hardware_automatic_brightness_available is not set, so we will use software implementation -->
     <bool name="config_automatic_brightness_available">true</bool>
 
-    <bool name="config_animateScreenLights">false</bool>
-
     <bool name="config_disableMenuKeyInLockScreen">true</bool>
 
     <!-- Array of light sensor LUX values to define our levels for auto backlight brightness support.
@@ -80,8 +78,7 @@
         <item>0</item>
         <item>0</item>
     </integer-array>
-    
-
+ 
     <integer name="config_deskDockKeepsScreenOn">0</integer>
     <integer name="config_carDockKeepsScreenOn">1</integer>
 
@@ -108,8 +105,6 @@
 		<item>"mobile_mms,2,0,2,60000,true"</item>
 		<item>"mobile_supl,3,0,2,60000,true"</item>
 		<item>"mobile_dun,4,0,3,60000,true"</item>
-		<item>"mobile_hipri,5,0,3,60000,true"</item>
-		<item>"mobile_bluetooth,7,7,1,-1,true"</item>
 	</string-array>
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
          USB interfaces.  If the device doesn't want to support tething over USB this should

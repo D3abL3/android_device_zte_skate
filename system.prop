@@ -14,3 +14,4 @@ ro.sf.hwrotation=180
 
 wifi.interface=eth0
 ro.compcache.default=0
+persist.sys.use_16bpp_alpha=1

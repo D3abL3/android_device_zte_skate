@@ -1,5 +1,7 @@
 # Copyright 2006 The Android Open Source Project
 
+ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),skate)
+
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 
@@ -14,6 +16,7 @@ LOCAL_SHARED_LIBRARIES := \
     libhardware_legacy
 
 LOCAL_CFLAGS :=
+
 ifdef BOARD_USE_NEW_LIBRIL_HTC
     LOCAL_CFLAGS += -DNEW_LIBRIL_HTC
 endif
@@ -23,7 +26,6 @@ LOCAL_MODULE:= libril
 LOCAL_LDLIBS += -lpthread
 
 include $(BUILD_SHARED_LIBRARY)
-
 
 # For RdoServD which needs a static library
 # =========================================
@@ -45,3 +47,4 @@ LOCAL_LDLIBS += -lpthread
 
 include $(BUILD_STATIC_LIBRARY)
 endif # ANDROID_BIONIC_TRANSITION
+endif # TARGET_BOOTLOADER_BOARD_NAME

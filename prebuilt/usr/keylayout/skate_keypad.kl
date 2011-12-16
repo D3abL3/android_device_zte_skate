@@ -3,6 +3,4 @@ key 114   VOLUME_DOWN       WAKE_DROPPED
 key 102   HOME              WAKE
 key 139   MENU              WAKE_DROPPED
 key 158   BACK              WAKE_DROPPED
-key 116   POWER             WAKE_DROPPED
-
 

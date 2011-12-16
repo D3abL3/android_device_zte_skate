@@ -56,6 +56,7 @@ on boot
     mkdir /data/misc/wifi/wpa_supplicant 0770 wifi wifi
     mkdir /data/misc/dhcp 0770 dhcp dhcp
     chown dhcp dhcp /data/misc/dhcp
+
     setprop wifi.interface eth0
     mkdir /data/wpstiles/ 0777 shell
     mkdir /etc/wiper 0775 location qcom_oncrpc
@@ -146,7 +147,7 @@ service dhcpcd_eth0 /system/bin/dhcpcd -ABKL
     class main
     disabled
     oneshot
-	
+
 service iprenew_eth0 /system/bin/iprenew -n
     class main
     disabled
@@ -169,7 +170,6 @@ service akmd /system/bin/akmd8962
     class main
     user root
     oneshot
-
 on property:persist.sys.charging.disable=1
     write /sys/module/msm_battery/parameters/usb_chg_enable 0
 
