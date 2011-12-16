@@ -1,0 +1,184 @@
+on fs
+    export EXTERNAL_STORAGE /mnt/sdcard
+    mkdir /mnt 0775 root system
+    mkdir /mnt/sdcard 0000 system system
+    # for backwards compatibility
+    symlink /mnt/sdcard /sdcard
+
+on boot
+
+# Hack for sh files in /etc 
+    chmod 7777 /system/etc/*.sh
+
+# cpufreq configurations
+    write /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate 500000
+    write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold 90
+    write /sys/devices/system/cpu/cpufreq/ondemand/down_threshold 30
+
+# Setup charging
+    chown system system /sys/module/msm_battery/parameters/usb_chg_enable
+
+# Setup android gadget
+   write /sys/module/g_android/parameters/serial_number CM7-Skate
+   write /sys/module/g_android/parameters/product_id 0x1351
+
+# Setup bluetooth
+    mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
+    chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
+    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
+    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
+    chown bluetooth bluetooth /sys/class/rfkill/rfkill1/state
+    chown bluetooth bluetooth /proc/bluetooth/sleep/proto
+    chown bluetooth bluetooth /proc/bcm/sleep/proto
+    chown system system /sys/module/sco/parameters/disable_esco
+    chmod 0660 /sys/module/bluetooth_power/parameters/power
+    chmod 0660 /sys/class/rfkill/rfkill0/state
+    chmod 0660 /sys/class/rfkill/rfkill1/state
+    chmod 0660 /proc/bluetooth/sleep/proto
+    chmod 0660 /proc/bcm/sleep/proto
+    chown bluetooth bluetooth /dev/ttyHS0
+    chmod 0660 /dev/ttyHS0
+    chown bluetooth bluetooth /sys/devices/platform/msm_serial_hs.0/clock
+    chmod 0660 /sys/devices/platform/msm_serial_hs.0/clock
+    chown system system /sys/devices/platform/msm_hsusb_periphera/composition
+
+# Permission for ril
+   chown radio system /dev/pm_monitor
+   chmod 0770 /ddev/pm_monitor
+
+# Sensors
+    chmod 0777 /dev/akm8962_aot
+    chmod 0777 /dev/akm8962_dev
+
+# Create the directories used by the Wireless subsystem
+    mkdir /data/misc/wifi 0770 wifi wifi
+    mkdir /data/misc/wifi/sockets 0770 wifi wifi
+    mkdir /data/misc/wifi/wpa_supplicant 0770 wifi wifi
+    mkdir /data/misc/dhcp 0770 dhcp dhcp
+    chown dhcp dhcp /data/misc/dhcp
+    setprop wifi.interface eth0
+    mkdir /data/wpstiles/ 0777 shell
+    mkdir /etc/wiper 0775 location qcom_oncrpc
+    mkdir /data/misc/prox 0777 radio radio 
+
+# Give system access to wpa_supplicant.conf for backup and restore
+    mkdir /data/misc/wifi 0770 wifi wifi
+    mkdir /data/misc/wifi/wpa_supplicant 0770 wifi wifi  
+    chmod 0660 /data/misc/wifi/wpa_supplicant.conf
+
+# Wpa_supplicant ctrl sockets
+    mkdir /data/misc/wifi/sockets 0770 system wifi
+    mkdir /data/misc/dhcp 0770 dhcp dhcp
+    mkdir /data/system 0775 system system
+
+# For qmuxd socket
+    mkdir /data/radio 0770 radio radio
+    chown radio radio 0770 /data/radio
+
+    chown system system /sys/class/leds/green/blink
+    chown system system /sys/class/leds/green/grpfreq
+    chown system system /sys/class/leds/green/grppwm
+    chown system system /sys/class/leds/red/blink
+    chown system system /sys/class/leds/red/brightness
+    chown system system /sys/class/leds/red/grpfreq
+    chown system system /sys/class/leds/red/grppwm
+    chown system system /sys/class/leds/amber/blink
+    chown system system /sys/class/leds/amber/brightness
+    chown system system /sys/class/leds/amber/grpfreq
+    chown system system /sys/class/leds/amber/grppwm
+
+# SD card polling
+    chown system system /sys/module/g_android/parameters/product_id
+    chown system system /sys/devices/platform/msm_sdcc.1/polling
+    chown system system /sys/devices/platform/msm_sdcc.2/polling
+    chown system system /sys/devices/platform/msm_sdcc.3/polling
+    chown system system /sys/devices/platform/msm_sdcc.4/polling
+    chown system system /sys/devices/platform/android_usb/composition
+    chown system system /sys/devices/platform/android_usb/remote_wakeup
+
+# Enable MASS storage on SDCARD
+    write /sys/devices/platform/mass_storage/lun0/file /dev/block/mmcblk0p1
+    write /sys/bus/platform/drivers/msm_sdcc/msm_sdcc.1/polling 1
+
+service hci_qcomm_init /system/bin/log -t qcom-bluetooth -p i "hci_qcomm_init service requested"
+    class main
+    user bluetooth
+    group bluetooth net_bt_admin
+    disabled
+    oneshot
+
+service hciattach /system/bin/hciattach -n -s 115200 /dev/ttyHS0 bcm2035
+    class main
+    user bluetooth
+    group qcom_oncrpc bluetooth net_bt_admin system
+    disabled
+    oneshot
+
+service port-bridge /system/bin/port-bridge /dev/smd0 /dev/ttyGS0
+
+service qmuxd /system/bin/qmuxd
+    class main
+
+on property:init.svc.bluetoothd=running
+    write /sys/devices/virtual/bluetooth/hci0/idle_timeout 7000
+    start abtfilt
+
+on property:init.svc.bluetoothd=stopped
+    stop abtfilt
+
+on property:init.svc.wpa_supplicant=stopped
+    stop dhcpcd
+
+service abtfilt /system/bin/abtfilt -c -d -z -n
+    disabled
+    oneshot
+
+service usbconfig /sbin/usbconfig
+    oneshot
+
+service wpa_supplicant /system/bin/wpa_supplicant -Dwext -ieth0 -c/data/misc/wifi/wpa_supplicant.conf
+    class main
+    socket wpa_eth0 dgram 660 wifi wifi
+    disabled
+    oneshot
+
+service dhcpcd_eth0 /system/bin/dhcpcd -ABKL
+    class main
+    disabled
+    oneshot
+	
+service iprenew_eth0 /system/bin/iprenew -n
+    class main
+    disabled
+    oneshot
+
+service btwlancoex /system/bin/sh /system/etc/init.qcom.coex.sh
+    class main
+    user root
+    group qcom_oncrpc bluetooth net_bt_admin
+    disabled
+    oneshot
+
+service hostapd /system/bin/hostapd /data/misc/wifi/hostapd.conf
+    socket hostapd_wl10.0 dgram 660 wifi wifi
+    group wifi inet
+    oneshot
+    disabled
+
+service akmd /system/bin/akmd8962
+    class main
+    user root
+    oneshot
+
+on property:persist.sys.charging.disable=1
+    write /sys/module/msm_battery/parameters/usb_chg_enable 0
+
+on property:persist.sys.charging.disable=0
+    write /sys/module/msm_battery/parameters/usb_chg_enable 1
+
+service btld /system/bin/btld -lpm 1 -hb 3000000
+    class main
+    user root
+    group bluetooth net_bt_admin
+    disabled
+    oneshot
