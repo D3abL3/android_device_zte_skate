@@ -33,9 +33,6 @@
 UsbController::UsbController() {
 }
 
-UsbController::~UsbController() {
-}
-
 int UsbController::startRNDIS() {
     LOGD("Usb RNDIS start");
     return enableRNDIS(true);
@@ -56,31 +53,6 @@ int UsbController::enableRNDIS(bool enable) {
 	    return 0;
 	}
 
-/*
-int UsbController::enableRNDIS(bool enable) {
-    char value[20];
-
-    int fd = open("/sys/module/g_android/parameters/product_id", O_RDWR);
-
-    // * Switch to RNDIS composition (Product id = 1364) When RNDIS is enabled.
-    // * Switch back to default composition (Product id = 1351 for ADB and 1353 for UMS) after RNDIS
-    // * is disabled.
-    // *
-    char disabled_value[6];
-    char adb[1];
-    property_get("persist.service.adb.enable", adb, "0");
-    if (adb[0]=='1')
-        strncpy(disabled_value,"1354\n",5);
-    else
-        strncpy(disabled_value,"1353\n",5);
-    disabled_value[5] = '\0';
-    char enable_value[] = "1364\n";
-    int count = snprintf(value, sizeof(value), "%s", (enable ? enable_value : disabled_value));
-    write(fd, value, count);
-    close(fd);
-    return 0;
-}
-*/
 bool UsbController::isRNDISStarted() {
     char value[5];
     int fd = open("/sys/module/g_android/parameters/product_id", O_RDONLY);

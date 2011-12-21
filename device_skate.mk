@@ -33,32 +33,34 @@ PRODUCT_DEVICE := skate
 PRODUCT_MODEL := ZTE Skate
 
 PRODUCT_PACKAGES += \
+    libRS \
     librs_jni \
-    Gallery3d \
+    Stk \
+    Gallery2 \
     SpareParts \
-    Development \
-    Term \
+    CMSettings \
     libOmxCore \
     libOmxVidEnc \
     FM \
     abtfilt \
-    UsbMassStorage \
     dexpreopt
 
 PRODUCT_PACKAGES += \
+    overlay.default \
     copybit.skate \
     gralloc.skate \
     lights.skate \
     gps.skate \
+    libgenlock \
+    libtilerenderer \
     sensors.skate \
     hwcomposer.default
 
- #Temp packages
-PRODUCT_PACKAGES += \
-    bash vim nano libncurses ssh rsync \
-    Stk CMSettings \
-    e2fsck resize2fs e2fsck \
-    libext2_com_err libext2_profile libext2_blkid libext2_e2p libext2_uuid libext2fs
+PRODUCT_LOCALES := en
+
+# Skate uses high-density artwork where available
+PRODUCT_AAPT_CONFIG := hdpi
+PRODUCT_AAPT_PREF_CONFIG := hdpi
 
 # proprietary side of the device
 $(call inherit-product-if-exists, vendor/zte/skate/skate-vendor.mk)
@@ -68,11 +70,19 @@ DISABLE_DEXPREOPT := false
 PRODUCT_COPY_FILES += \
     device/zte/skate/prebuilt/usr/keylayout/skate_keypad.kl:system/usr/keylayout/skate_keypad.kl \
     device/zte/skate/prebuilt/usr/keylayout/7k_handset.kl:system/usr/keylayout/7k_handset.kl \
+    device/zte/skate/prebuilt/usr/keylayout/Generic.kl:system/usr/keylayout/Generic.kl \
     device/zte/skate/prebuilt/usr/idc/synaptics-rmi4-ts.idc:system/usr/idc/synaptics-rmi4-ts.idc
 
 # Vold
 PRODUCT_COPY_FILES += \
     device/zte/skate/prebuilt/etc/vold.fstab:system/etc/vold.fstab
+
+# EGL
+PRODUCT_COPY_FILES += \
+    device/zte/skate/prebuilt/lib/egl/libEGL_adreno200.so:system/lib/egl/libEGL_adreno200.so \
+    device/zte/skate/prebuilt/lib/egl/libGLESv1_CM_adreno200.so:system/lib/egl/libGLESv1_CM_adreno200.so \
+    device/zte/skate/prebuilt/lib/egl/libGLESv2_adreno200.so:system/lib/egl/libGLESv2_adreno200.so \
+    device/zte/skate/prebuilt/lib/egl/libq3dtools_adreno200.so:system/lib/egl/libq3dtools_adreno200.so 
 
 # Init
 PRODUCT_COPY_FILES += \
@@ -83,7 +93,8 @@ PRODUCT_COPY_FILES += \
 # Audio
 PRODUCT_COPY_FILES += \
     device/zte/skate/prebuilt/etc/AutoVolumeControl.txt:system/etc/AutoVolumeControl.txt \
-    device/zte/skate/prebuilt/lib/hw/audio.primary.skate.so:system/lib/hw/audio.primary.skate.so
+    device/zte/skate/prebuilt/lib/hw/audio.primary.skate.so:system/lib/hw/audio.primary.skate.so \
+    device/zte/skate/prebuilt/lib/hw/audio_policy.skate.so:system/lib/hw/audio_policy.skate.so
 
 # WLAN + BT + FM
 PRODUCT_COPY_FILES += \
@@ -128,10 +139,7 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 
 # This should not be needed but on-screen keyboard uses the wrong density without it.
 PRODUCT_PROPERTY_OVERRIDES += \
-    qemu.sf.lcd_density=240 
-
-PRODUCT_PROPERTY_OVERIDES += \
-    ro.config.disable_hw_accel=true
+    qemu.sf.lcd_density=240
 
 PRODUCT_PROPERTY_OVERRIDES += \
     keyguard.no_require_sim=true \

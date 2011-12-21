@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),skate)
 
 LOCAL_PATH := $(call my-dir)
 
@@ -52,3 +53,5 @@ LOCAL_MODULE_TAGS := optional
 include $(BUILD_EXECUTABLE)
 
 endif # !TARGET_SIMULATOR
+
+endif # TARGET_BOOTLOADER_BOARD_NAME

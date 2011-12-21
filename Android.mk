@@ -13,5 +13,6 @@
 # limitations under the License.
 
 ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),skate)
-  include $(call all-named-subdir-makefiles, libcopybit libgralloc liblights libril libsensors UsbMassStorage)
+  include $(call all-named-subdir-makefiles, libcopybit libgralloc liblights libril libsensors CMSettings)
+   PACKAGES.Phone.OVERRIDES += DSPManager PinyinIME OpenWnn
 endif

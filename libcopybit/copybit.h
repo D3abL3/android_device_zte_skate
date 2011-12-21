@@ -62,10 +62,7 @@ enum {
     COPYBIT_TRANSFORM       = 4,
     /* blurs the copied bitmap. The amount of blurring cannot be changed 
      * at this time. */
-    COPYBIT_BLUR            = 5,
-    /* Informs the copybit that the source and destination contains
-    premultiplied alpha */
-    COPYBIT_PREMULTIPLIED_ALPHA  = 6
+    COPYBIT_BLUR            = 5
 };
 
 /* values for copybit_set_parameter(COPYBIT_TRANSFORM) */
@@ -112,10 +109,6 @@ struct copybit_image_t {
     void        *base;
     /* handle to the image */
     native_handle_t* handle;
-    /* number of pixels added for the stride */
-    uint32_t    horiz_padding;
-    /* number of pixels added for the vertical stride */
-    uint32_t    vert_padding;
 };
 
 /* Rectangle */
