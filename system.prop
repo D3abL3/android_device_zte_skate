@@ -16,4 +16,6 @@ wifi.interface=eth0
 ro.compcache.default=0
 persist.sys.use_16bpp_alpha=1
 
+sys.usb.config=adb,mass_storage
+sys.usb.state=adb
 persist.sys.usb.config=adb,mass_storage

@@ -19,12 +19,6 @@
 # product configuration (apps).
 #
 
-# Inherit from those products. Most specific first.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
-
-$(call inherit-product, device/common/gps/gps_eu_supl.mk)
-
 DEVICE_PACKAGE_OVERLAYS := device/zte/skate/overlay
 
 # Discard inherited values and use our own instead.
@@ -33,28 +27,26 @@ PRODUCT_DEVICE := skate
 PRODUCT_MODEL := ZTE Skate
 
 PRODUCT_PACKAGES += \
-    libRS \
-    librs_jni \
     Stk \
     Gallery2 \
     SpareParts \
+    SkateParts \
     CMSettings \
-    libOmxCore \
-    libOmxVidEnc \
     FM \
     abtfilt \
     dexpreopt
 
 PRODUCT_PACKAGES += \
-    overlay.default \
-    copybit.skate \
+    libstagefrighthw \
+    libmm-omxcore \
+    libOmxCore \
+    libOmxVidEnc \
     gralloc.skate \
     lights.skate \
     gps.skate \
     libgenlock \
     libtilerenderer \
-    sensors.skate \
-    hwcomposer.default
+    sensors.skate
 
 PRODUCT_LOCALES := en
 
@@ -77,8 +69,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/zte/skate/prebuilt/etc/vold.fstab:system/etc/vold.fstab
 
-# EGL
+# EGL and temporary hack for surfaceflinger
 PRODUCT_COPY_FILES += \
+    device/zte/skate/prebuilt/lib/libsurfaceflinger.so:system/lib/libsurfaceflinger.so \
     device/zte/skate/prebuilt/lib/egl/libEGL_adreno200.so:system/lib/egl/libEGL_adreno200.so \
     device/zte/skate/prebuilt/lib/egl/libGLESv1_CM_adreno200.so:system/lib/egl/libGLESv1_CM_adreno200.so \
     device/zte/skate/prebuilt/lib/egl/libGLESv2_adreno200.so:system/lib/egl/libGLESv2_adreno200.so \
@@ -87,6 +80,7 @@ PRODUCT_COPY_FILES += \
 # Init
 PRODUCT_COPY_FILES += \
     device/zte/skate/prebuilt/init.skate.rc:root/init.skate.rc \
+    device/zte/skate/prebuilt/init.skate.usb.rc:root/init.skate.usb.rc \
     device/zte/skate/prebuilt/ueventd.skate.rc:root/ueventd.skate.rc \
     device/zte/skate/prebuilt/usbconfig:root/sbin/usbconfig
 
@@ -113,7 +107,7 @@ PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
     frameworks/base/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
     frameworks/base/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
-    frameworks/base/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml
+    frameworks/base/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions.android.hardware.touchscreen.multitouch.jazzhand.xml
 
 # Kernel Modules
 PRODUCT_COPY_FILES += \
@@ -127,9 +121,7 @@ PRODUCT_COPY_FILES += \
     device/zte/skate/prebuilt/etc/nv_4319.txt:system/etc/nv_4319.txt
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.build.baseband_version=P743B01 \
-    wifi.supplicant_scan_interval=60 \
-    ro.com.android.dataroaming=false
+    wifi.supplicant_scan_interval=60
 
 # Skate uses high-density artwork where available
 PRODUCT_LOCALES += hdpi
