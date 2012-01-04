@@ -17,8 +17,6 @@
 # Product-specific compile-time definitions.
 #
 
-LOCAL_PATH:= $(call my-dir)
-
 # WARNING: This line must come *before* including the proprietary
 # variant, so that it gets overwritten by the parent (which goes
 # against the traditional rules of inheritance).
@@ -62,11 +60,16 @@ BOARD_USE_CAF_LIBCAMERA := true
 
 # Wifi
 BOARD_WPA_SUPPLICANT_DRIVER := WEXT
-WPA_SUPPLICANT_VERSION := VER_0_6_X
+# I know we have the bcm4319 but this is a hack to get around incompatibility with the BCM4319
+BOARD_WLAN_DEVICE := bcm4329
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_wext
+WPA_SUPPLICANT_VERSION := VER_0_8_X
+BOARD_HOSTAPD_DRIVER := WEXT
+BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_wext
 WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/dhd.ko"
 WIFI_DRIVER_FW_PATH_STA := "/system/etc/fw_4319_apsta.bin"
 WIFI_DRIVER_FW_PATH_AP := "/system/etc/fw_4319.bin"
-WIFI_DRIVER_MODULE_ARG := "firmware_path=/system/etc/fw_4319.bin,nvram_path=/system/etc/nv_4319.txt"
+WIFI_DRIVER_MODULE_ARG := "firmware_path=/system/etc/fw_4319.bin,nvram_path=/system/etc/nv_4319.txt iface_name=wlan"
 WIFI_DRIVER_MODULE_NAME := "dhd"
 
 # Browser
@@ -81,7 +84,7 @@ BOARD_USE_LEGACY_TOUCHSCREEN := true
  
 # Graphics
 BOARD_EGL_CFG := device/zte/skate/prebuilt/lib/egl/egl.cfg
-COMMON_GLOBAL_CFLAGS += -DMISSING_EGL_EXTERNAL_IMAGE -DMISSING_EGL_PIXEL_FORMAT_YV12 -DMISSING_GRALLOC_BUFFERS
+COMMON_GLOBAL_CFLAGS += -DMISSING_EGL_EXTERNAL_IMAGE -DMISSING_EGL_PIXEL_FORMAT_YV12 -DMISSING_GRALLOC_BUFFERS -DQCOM_HARDWARE -DREFRESH_RATE=60
 BOARD_AVOID_DRAW_TEXTURE_EXTENSION := true
 TARGET_USES_16BPPSURFACE_FOR_OPAQUE := true
 BOARD_OVERLAY_FORMAT_YCbCr_420_SP := true
@@ -89,13 +92,15 @@ BOARD_OVERLAY_MINIFICATION_LIMIT := 2
 BOARD_USES_OVERLAY := true
 BOARD_HAS_FLIPPED_SCREEN := true
 TARGET_SPECIFIC_HEADER_PATH := device/zte/skate/include
+BOARD_EGL_GRALLOC_USAGE_FILTER := true
+COPYBIT_MSM7K := true
 
 # GPS
-BOARD_USES_QCOM_HARDWARE := true
-BOARD_USES_QCOM_LIBS := true
-BOARD_USES_QCOM_GPS := true
-BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 1240
-BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := skate
+#BOARD_USES_QCOM_HARDWARE := true
+#BOARD_USES_QCOM_LIBS := true
+#BOARD_USES_QCOM_GPS := true
+#BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 1240
+#BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := skate
 
 # USB 
 BOARD_CUSTOM_USB_CONTROLLER := ../../device/zte/skate/UsbController.cpp
@@ -104,7 +109,22 @@ BOARD_HAS_SDCARD_INTERNAL := true
 BOARD_SDCARD_DEVICE_INTERNAL := /dev/block/vold/179:1
 BOARD_SDEXT_DEVICE := /dev/block/vold/179:2
 BOARD_UMS_LUNFILE := "/sys/devices/platform/msm_hsusb/gadget/lun0/file"
-TARGET_USE_CUSTOM_LUN_FILE_PATH  := "/sys/devices/platform/msm_hsusb/gadget/lun0/file"
+TARGET_USE_CUSTOM_LUN_FILE_PATH  := "/sys/devices/platform/msm_hsusb/gadget/lun0/file
+
+# Recovery
+BOARD_DATA_DEVICE := /dev/block/mtdblock6
+BOARD_DATA_FILESYSTEM := auto
+BOARD_DATA_FILESYSTEM_OPTIONS := rw
+BOARD_SYSTEM_DEVICE := /dev/block/mtdblock5
+BOARD_SYSTEM_FILESYSTEM := auto
+BOARD_SYSTEM_FILESYSTEM_OPTIONS := rw
+BOARD_CACHE_DEVICE := /dev/block/mtdblock4
+BOARD_CACHE_FILESYSTEM := auto
+BOARD_CACHE_FILESYSTEM_OPTIONS := rw
+BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/zte/skate/recovery/recovery_keys.c
+BOARD_CUSTOM_GRAPHICS := ../../../device/zte/skate/recovery/graphics.c
+
+TARGET_PREBUILT_RECOVERY_KERNEL := device/zte/skate/recovery_kernel
 
 # # cat /proc/mtd
 # dev:    size   erasesize  name

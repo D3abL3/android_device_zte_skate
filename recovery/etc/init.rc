@@ -1,0 +1,53 @@
+on early-init
+    start ueventd
+
+on init
+
+    # setup enviroment
+    export PATH /sbin
+    export ANDROID_ROOT /system
+    export ANDROID_DATA /data
+    export EXTERNAL_STORAGE /sdcard
+
+    # setup recovery filesystems
+    mkdir /sdcard 0771 system system
+    mkdir /sd-ext 0771 system system
+    mkdir /system 0771 system system
+    mkdir /data 0771 system system
+    mkdir /cache 0770 system cache
+    mkdir /etc 0770 root root
+    mkdir /tmp 01777 root root
+
+on boot
+    ifup lo
+    hostname localhost
+    domainname localdomain
+    class_start default
+
+    # mount inital filesystems
+    mount tmpfs tmpfs /tmp size=64m
+    wait /dev/block/mmcblk0p1
+    mount vfat /dev/block/mmcblk0p1 /sdcard rw
+
+    # turn up backlight & keypad
+    write /sys/class/leds/lcd-backlight/brightness 255
+    write /sys/class/leds/button-backlight/brightness 255
+
+
+service usbconfig /sbin/usbconfig
+    oneshot
+
+service ueventd /sbin/ueventd
+    critical
+
+service recovery /sbin/recovery.sh
+    oneshot
+
+service adbd /sbin/adbd recovery
+    disabled
+
+on property:persist.service.adb.enable=1
+    start adbd
+
+on property:persist.service.adb.enable=0
+    stop adbd

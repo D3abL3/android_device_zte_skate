@@ -37,6 +37,24 @@ PRODUCT_PACKAGES += \
     dexpreopt
 
 PRODUCT_PACKAGES += \
+    librs_jni \
+    Development \
+    Term \
+    libaudioutils \
+    libtinyalsa \
+    libOmxVenc \
+    libOmxVdec \
+    FileManager \
+    screencap \
+    audio.a2dp.default \
+    dexpreopt \
+    abtfilt \
+    hwcomposer.msm7k \
+    zipalign \
+    Superuser
+
+PRODUCT_PACKAGES += \
+    prox_cal \
     libstagefrighthw \
     libmm-omxcore \
     libOmxCore \
@@ -49,6 +67,8 @@ PRODUCT_PACKAGES += \
     sensors.skate
 
 PRODUCT_LOCALES := en
+
+pathmap_INCL := recovery:device/zte/skate/recovery
 
 # Skate uses high-density artwork where available
 PRODUCT_AAPT_CONFIG := hdpi

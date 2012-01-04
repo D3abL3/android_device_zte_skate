@@ -59,7 +59,7 @@ on boot
     mkdir /data/misc/dhcp 0770 dhcp dhcp
     chown dhcp dhcp /data/misc/dhcp
 
-    setprop wifi.interface eth0
+    setprop wifi.interface wlan0
     mkdir /data/wpstiles/ 0777 shell
     mkdir /etc/wiper 0775 location qcom_oncrpc
     mkdir /data/misc/prox 0777 radio radio 
@@ -92,17 +92,8 @@ on boot
 
 # SD card polling
     chown system system /sys/module/g_android/parameters/product_id
-    chown system system /sys/devices/platform/msm_sdcc.1/polling
-    chown system system /sys/devices/platform/msm_sdcc.2/polling
-    chown system system /sys/devices/platform/msm_sdcc.3/polling
-    chown system system /sys/devices/platform/msm_sdcc.4/polling
     chown system system /sys/devices/platform/android_usb/composition
     chown system system /sys/devices/platform/android_usb/remote_wakeup
-
-# Enable MASS storage on SDCARD
-    write /sys/devices/platform/mass_storage/lun0/file /dev/block/mmcblk0p1
-    write /sys/bus/platform/drivers/msm_sdcc/msm_sdcc.1/polling 1
-
 
 service hci_qcomm_init /system/bin/log -t qcom-bluetooth -p i "hci_qcomm_init service requested"
     class main
@@ -140,18 +131,18 @@ service abtfilt /system/bin/abtfilt -c -d -z -n
 service usbconfig /sbin/usbconfig
     oneshot
 
-service wpa_supplicant /system/bin/wpa_supplicant -Dwext -ieth0 -c/data/misc/wifi/wpa_supplicant.conf
+service wpa_supplicant /system/bin/wpa_supplicant -Dwext -iwlan0 -c/data/misc/wifi/wpa_supplicant.conf
     class main
-    socket wpa_eth0 dgram 660 wifi wifi
+    socket wpa_wlan0 dgram 660 wifi wifi
     disabled
     oneshot
 
-service dhcpcd_eth0 /system/bin/dhcpcd -ABKL
+service dhcpcd_wlan0 /system/bin/dhcpcd -ABKL
     class main
     disabled
     oneshot
 
-service iprenew_eth0 /system/bin/iprenew -n
+service iprenew_wlan0 /system/bin/iprenew -n
     class main
     disabled
     oneshot
@@ -174,6 +165,7 @@ service akmd /system/bin/akmd8962
     class main
     user root
     oneshot
+
 on property:persist.sys.charging.disable=1
     write /sys/module/msm_battery/parameters/usb_chg_enable 0
 

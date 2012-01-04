@@ -5,17 +5,21 @@ rild.libpath=/system/lib/libril-qc-1.so
 rild.libargs=-d /dev/smd0
 dalvik.vm.lockprof.threshold=500
 dalvik.vm.dexopt-flags=m=y
-dalvik.vm.heapsize=32m
+dalvik.vm.heapsize=48m
 dalvik.vm.execution-mode=int:jit
 dalvik.vm.dexopt-data-only=1
 
 ro.sf.lcd_density=240
 ro.sf.hwrotation=180
 
-wifi.interface=eth0
+wifi.interface=wlan0
 ro.compcache.default=0
 persist.sys.use_16bpp_alpha=1
+media.stagefright.enable-player=true
+windowsmgr.max_events_per_sec=150
+debug.performance.tuning=1
+video.accelerate.hw=1
 
-sys.usb.config=adb,mass_storage
+sys.usb.config=mass_storage,adb
 sys.usb.state=adb
-persist.sys.usb.config=adb,mass_storage
+persist.sys.usb.config=mass_storage,adb
