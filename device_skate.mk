@@ -61,6 +61,7 @@ PRODUCT_PACKAGES += \
     libOmxCore \
     libOmxVidEnc \
     lights.skate \
+    copybit.skate \
     gps.skate \
     libQcomUI \
     libmemalloc \
