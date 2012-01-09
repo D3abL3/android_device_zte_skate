@@ -18,3 +18,5 @@ PRODUCT_NAME := cm_skate
 
 ## Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := skate
+
+PRODUCT_BUILD_PROP_OVERRIDES += PRODUCT_NAME=soju BUILD_ID=IML74K BUILD_FINGERPRINT=google/soju/crespo:4.0.3/IML74K/239410:user/release-keys PRIVATE_BUILD_DESC="soju-user 4.0.3 IML74K 239410 release-keys" BUILD_NUMBER=239410

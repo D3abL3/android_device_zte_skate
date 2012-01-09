@@ -81,10 +81,12 @@ HTTP := android
 # Sensors
 BOARD_VENDOR_USE_AKMD := akm8962
 BOARD_USE_LEGACY_TOUCHSCREEN := true
+
+# pathmap_INCL := recovery:device/zte/skate/recovery
  
 # Graphics
 BOARD_EGL_CFG := device/zte/skate/prebuilt/lib/egl/egl.cfg
-COMMON_GLOBAL_CFLAGS += -DMISSING_EGL_EXTERNAL_IMAGE -DMISSING_EGL_PIXEL_FORMAT_YV12 -DMISSING_GRALLOC_BUFFERS -DQCOM_HARDWARE -DREFRESH_RATE=60
+COMMON_GLOBAL_CFLAGS += -DMISSING_EGL_EXTERNAL_IMAGE -DMISSING_EGL_PIXEL_FORMAT_YV12 -DMISSING_GRALLOC_BUFFERS -DQCOM_HARDWARE
 BOARD_AVOID_DRAW_TEXTURE_EXTENSION := true
 TARGET_USES_16BPPSURFACE_FOR_OPAQUE := true
 BOARD_OVERLAY_FORMAT_YCbCr_420_SP := true
@@ -93,14 +95,13 @@ BOARD_USES_OVERLAY := true
 BOARD_HAS_FLIPPED_SCREEN := true
 TARGET_SPECIFIC_HEADER_PATH := device/zte/skate/include
 BOARD_EGL_GRALLOC_USAGE_FILTER := true
-COPYBIT_MSM7K := true
 
 # GPS
 #BOARD_USES_QCOM_HARDWARE := true
-#BOARD_USES_QCOM_LIBS := true
-#BOARD_USES_QCOM_GPS := true
-#BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 1240
-#BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := skate
+BOARD_USES_QCOM_LIBS := true
+BOARD_USES_QCOM_GPS := true
+BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 1240
+BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := skate
 
 # USB 
 BOARD_CUSTOM_USB_CONTROLLER := ../../device/zte/skate/UsbController.cpp
@@ -109,7 +110,7 @@ BOARD_HAS_SDCARD_INTERNAL := true
 BOARD_SDCARD_DEVICE_INTERNAL := /dev/block/vold/179:1
 BOARD_SDEXT_DEVICE := /dev/block/vold/179:2
 BOARD_UMS_LUNFILE := "/sys/devices/platform/msm_hsusb/gadget/lun0/file"
-TARGET_USE_CUSTOM_LUN_FILE_PATH  := "/sys/devices/platform/msm_hsusb/gadget/lun0/file
+TARGET_USE_CUSTOM_LUN_FILE_PATH  := "/sys/devices/platform/msm_hsusb/gadget/lun0/file"
 
 # Recovery
 BOARD_DATA_DEVICE := /dev/block/mtdblock6
@@ -123,8 +124,8 @@ BOARD_CACHE_FILESYSTEM := auto
 BOARD_CACHE_FILESYSTEM_OPTIONS := rw
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/zte/skate/recovery/recovery_keys.c
 BOARD_CUSTOM_GRAPHICS := ../../../device/zte/skate/recovery/graphics.c
-
-TARGET_PREBUILT_RECOVERY_KERNEL := device/zte/skate/recovery_kernel
+TARGET_PREBUILT_KERNEL := device/zte/skate/prebuilt/kernel
+# TARGET_PREBUILT_RECOVERY_KERNEL := device/zte/skate/prebuilt/recovery_kernel
 
 # # cat /proc/mtd
 # dev:    size   erasesize  name

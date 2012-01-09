@@ -1,5 +1,3 @@
-# Copyright 2006 The Android Open Source Project
-
 ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),skate)
 
 LOCAL_PATH:= $(call my-dir)
@@ -16,10 +14,6 @@ LOCAL_SHARED_LIBRARIES := \
     libhardware_legacy
 
 LOCAL_CFLAGS :=
-
-ifdef BOARD_USE_NEW_LIBRIL_HTC
-    LOCAL_CFLAGS += -DNEW_LIBRIL_HTC
-endif
 
 LOCAL_MODULE:= libril
 

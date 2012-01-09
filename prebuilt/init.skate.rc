@@ -21,7 +21,7 @@ on boot
     chown system system /sys/module/msm_battery/parameters/usb_chg_enable
 
 # Setup android gadget
-   write /sys/module/g_android/parameters/serial_number CM7-Skate
+   write /sys/module/g_android/parameters/serial_number CM9-Skate
    write /sys/module/g_android/parameters/product_id 0x1351
 
 # Setup bluetooth

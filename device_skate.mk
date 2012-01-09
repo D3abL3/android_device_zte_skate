@@ -49,7 +49,8 @@ PRODUCT_PACKAGES += \
     audio.a2dp.default \
     dexpreopt \
     abtfilt \
-    hwcomposer.msm7k \
+    hwcomposer.msm7x27 \
+    copybit.msm7x27 \
     zipalign \
     Superuser
 
@@ -59,16 +60,15 @@ PRODUCT_PACKAGES += \
     libmm-omxcore \
     libOmxCore \
     libOmxVidEnc \
-    gralloc.skate \
     lights.skate \
     gps.skate \
+    libQcomUI \
+    libmemalloc \
     libgenlock \
     libtilerenderer \
     sensors.skate
 
 PRODUCT_LOCALES := en
-
-pathmap_INCL := recovery:device/zte/skate/recovery
 
 # Skate uses high-density artwork where available
 PRODUCT_AAPT_CONFIG := hdpi
@@ -89,8 +89,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/zte/skate/prebuilt/etc/vold.fstab:system/etc/vold.fstab
 
-# EGL and temporary hack for surfaceflinger
+# EGL and temporary hack for surfaceflinger and gralloc
 PRODUCT_COPY_FILES += \
+    device/zte/skate/prebuilt/lib/hw/gralloc.msm7x27.so:system/lib/hw/gralloc.msm7x27.so \
     device/zte/skate/prebuilt/lib/libsurfaceflinger.so:system/lib/libsurfaceflinger.so \
     device/zte/skate/prebuilt/lib/egl/libEGL_adreno200.so:system/lib/egl/libEGL_adreno200.so \
     device/zte/skate/prebuilt/lib/egl/libGLESv1_CM_adreno200.so:system/lib/egl/libGLESv1_CM_adreno200.so \
@@ -155,7 +156,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     keyguard.no_require_sim=true \
-    ro.telephony.ril.v3=icccardstatus,datacall,signalstrength,facilitylock \
+    ro.telephony.ril.v3=1 \
     ro.com.android.dateformat=dd-MM-yyyy \
     ro.ril.hsxpa=1 \
     ro.ril.gprsclass=10 \
